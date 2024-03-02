@@ -254,29 +254,61 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //     updateSquareColors(resetButton);
   //   });
-
   let selectedPiece = null;
   let selectedSquare = null;
+
+  let tempSquare = null;
+  let tempSquareBgColour = "";
+  let originalSquareBgColors = {};
 
   let squares = document.querySelectorAll(".square");
 
   squares.forEach((square) => {
+    // Store the original background color of the square
+    originalSquareBgColors[square.classList[1]] = square.style.backgroundColor;
+
     square.addEventListener("click", function () {
-      if (square.children.length > 0) {
-        // If the square has a piece
-        // Store the selected piece and square
-        selectedPiece = square.children[0];
-        selectedSquare = square;
-      } else if (selectedPiece) {
-        // If a piece is selected and the square is empty
-        // Move the piece to the new square
-        square.appendChild(selectedPiece);
-        // Remove the piece from the previous square
-        //selectedSquare.removeChild(selectedPiece);
-        // Clear the selected piece and square for the next move
-        selectedPiece = null;
-        selectedSquare = null;
+      // Revert the background color of the previously clicked square
+      if (tempSquare) {
+        tempSquare.style.backgroundColor =
+          originalSquareBgColors[tempSquare.classList[1]];
       }
+
+      // Highlight the clicked square
+      tempSquare = square;
+      tempSquare.style.backgroundColor = "#ffff33";
     });
   });
+
+  //   if (square.children.length > 0) {
+  //     // If the square has a piece
+  //     // Store the selected piece and square
+  //     selectedPiece = square.children[0];
+  //     selectedSquare = square;
+  //   } else if (selectedPiece) {
+  //     // If a piece is selected and the square is empty
+  //     // Check if the destination square already has a piece
+  //     if (square.children.length > 0) {
+  //       // Swap the pieces between the two squares
+  //       let destinationPiece = square.children[0];
+
+  //       // Remove the destination piece from its square
+  //       square.removeChild(destinationPiece);
+
+  //       // Append the selected piece to the destination square
+  //       square.appendChild(selectedPiece);
+
+  //       // Append the destination piece to the original square of the selected piece
+  //       selectedSquare.appendChild(destinationPiece);
+  //     } else {
+  //       // If the destination square is empty, move the piece to the new square
+  //       square.appendChild(selectedPiece);
+  //     }
+
+  //     // Clear the selected piece and square for the next move
+  //     selectedPiece = null;
+  //     selectedSquare = null;
+  //   }
+  //     });
+  //   });
 });

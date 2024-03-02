@@ -104,3 +104,7 @@ h1 {
     transform: scale(1);
   }
 }
+
+.selected {
+  background-color: #ffff33;
+}
