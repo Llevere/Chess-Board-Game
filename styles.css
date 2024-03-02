@@ -28,6 +28,8 @@ body {
   display: grid;
   place-items: center;
   justify-content: center;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .row {
