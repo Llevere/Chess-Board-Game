@@ -110,3 +110,15 @@ h1 {
 .selected {
   background-color: #ffff33;
 }
+
+@media screen and (max-width: 500px) {
+  .square {
+    width: 25px;
+    height: 25px;
+  }
+
+  li img {
+    height: 15px;
+    width: 15px;
+  }
+}

@@ -55,8 +55,8 @@ document.addEventListener("DOMContentLoaded", function () {
       li.style.border = "none";
       li.style.margin = 0;
       li.style.padding = 0;
-      li.style.width = "75px";
-      li.style.height = "75px";
+      //   li.style.width = "75px";
+      //   li.style.height = "75px";
       isEven = !isEven;
       //On the 8th column, switch tile colours
       if (i % 2 === 0 && j === numOfColumns - 1) {
