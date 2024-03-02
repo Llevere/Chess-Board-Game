@@ -1,0 +1,106 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* --theme-background-color: var(--theme-background-override-color, #302E2B);
+    --theme-board-style-image: url('https://assets-themes.chess.com/image/9rdwe/200.png');
+    --theme-board-style-image-3d-board: url('https://assets-themes.chess.com/image/9rdwe/3dboard.jpg');
+    --theme-board-style-image-3d-coordinates: url('https://assets-themes.chess.com/image/9rdwe/3dboardcoordinates.png');
+    --theme-board-style-preview-image: url('https://assets-themes.chess.com/image/9rdwe/square_preview.png');
+    --theme-board-style-coordinate-color-light: #EBECD0;
+    --theme-board-style-coordinate-color-dark: #739552;
+    --theme-board-style-highlight-color: #ffff33; 
+    
+    brown tile: #b58863
+    beige tile: #f0d9b5*/
+
+body {
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  background-color: #302e2b;
+  height: 100vh;
+}
+
+.container {
+  display: grid;
+  place-items: center;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+}
+
+ul {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+li {
+  list-style: none;
+  display: grid;
+  place-items: center;
+  font-size: 0;
+}
+
+.square {
+  margin: 0.5px;
+  width: 75px;
+  height: 75px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+}
+
+h1 {
+  margin: 20px;
+  font-size: 2.5rem;
+  text-align: center;
+  color: black;
+  border: 2px solid black;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+#tog {
+  margin: 40px 0px;
+  font-size: 1.5rem;
+  text-align: left;
+  background-color: #fff;
+  border: 2px solid #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#reset-btn {
+  background-color: #008c0e;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 4px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+#reset-btn:hover {
+  cursor: pointer;
+  background-color: #007b00;
+}
+
+/* Animation when the button is pressed */
+@keyframes pressAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
