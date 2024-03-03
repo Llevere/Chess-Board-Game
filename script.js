@@ -94,9 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         console.log("Empty square");
         if (tempSquare) {
-          console.log(
-            "Test - " + div.classList + " | | | | | " + tempSquare.innerHTML
-          );
+          swap(tempSquare, div);
         }
       }
     });
@@ -351,3 +349,12 @@ document.addEventListener("DOMContentLoaded", function () {
   //     });
   //   });
 });
+
+swap = (swappingFrom, swappingTo) => {
+  let img1 = swappingFrom.querySelector("img");
+  swappingFrom.removeChild(img1);
+  swappingTo.appendChild(img1);
+
+  swappingTo.style.backgroundColor =
+    originalSquareBgColors[swappingTo.classList[0]];
+};
