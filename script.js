@@ -1,3 +1,10 @@
+let selectedPiece = null;
+let selectedSquare = null;
+
+let tempSquare = null;
+let tempSquareBgColour = "";
+let originalSquareBgColors = {};
+
 document.addEventListener("DOMContentLoaded", function () {
   let chestPiecesdivst = document.getElementById("chest-pieces");
   let chessBoard = document.getElementById("container");
@@ -44,6 +51,26 @@ document.addEventListener("DOMContentLoaded", function () {
   //This is for an 8x8 grid.
   let columnNumber = 1;
 
+  //let squares = document.querySelectorAll(".square");
+
+  //  squares.forEach((square) => {
+  //    // Store the original background color of the square
+  //    //originalSquareBgColors[square.classList[0]] = square.style.backgroundColor;
+
+  //   //  square.addEventListener("click", function () {
+  //   //    if (square.children.length > 0) {
+  //   //      // Revert the background color of the previously cdivcked square
+  //   //      if (tempSquare) {
+  //   //        tempSquare.style.backgroundColor =
+  //   //          originalSquareBgColors[tempSquare.classList[0]];
+  //   //      }
+
+  //   //      // Highdivght the cdivcked square
+  //   //      tempSquare = square;
+  //   //      tempSquare.style.backgroundColor = "#ffff33";
+  //   //    }
+  //   //  });
+  //  });
   let isEven = false;
   for (let i = 1; i < 65; i++) {
     //Reset the row counter. 8th square was created.
@@ -53,13 +80,27 @@ document.addEventListener("DOMContentLoaded", function () {
       columnNumber++;
     }
     let div = document.createElement("div");
+    div.addEventListener("click", function () {
+      if (div.children.length > 0) {
+        // Revert the background color of the previously cdivcked square
+        if (tempSquare) {
+          tempSquare.style.backgroundColor =
+            originalSquareBgColors[tempSquare.classList[0]];
+        }
+
+        // Highdivght the cdivcked square
+        tempSquare = div;
+        tempSquare.style.backgroundColor = "#ffff33";
+      }
+    });
 
     // Match the 8th square from the previous row
     if ((i - 1) % 8 === 0) isEven = !isEven;
     div.className = `${columnNumber}${rowNumber % 10} ${
       isEven ? "even" : "odd"
-    }`;
+    } square`;
     isEven = !isEven;
+    originalSquareBgColors[div.classList[0]] = div.style.backgroundColor;
     //for (let j = 1; j < numOfColumns; j++) {
 
     //Create the coordinates on the board (Column : Row)
@@ -270,31 +311,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //     updateSquareColors(resetButton);
   //   });
-  let selectedPiece = null;
-  let selectedSquare = null;
-
-  let tempSquare = null;
-  let tempSquareBgColour = "";
-  let originalSquareBgColors = {};
-
-  let squares = document.querySelectorAll(".square");
-
-  squares.forEach((square) => {
-    // Store the original background color of the square
-    originalSquareBgColors[square.classdivst[1]] = square.style.backgroundColor;
-
-    square.addEventdivstener("cdivck", function () {
-      // Revert the background color of the previously cdivcked square
-      if (tempSquare) {
-        tempSquare.style.backgroundColor =
-          originalSquareBgColors[tempSquare.classdivst[1]];
-      }
-
-      // Highdivght the cdivcked square
-      tempSquare = square;
-      tempSquare.style.backgroundColor = "#ffff33";
-    });
-  });
 
   //   if (square.children.length > 0) {
   //     // If the square has a piece

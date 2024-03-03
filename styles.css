@@ -45,14 +45,12 @@ body {
   height: 100%; /* Each cell takes up 1/8 of the container height */
 }
 
-.square {
+/* .square {
   margin: 0.5px;
-  /* width: 75px;
-  height: 75px; */
   width: 12.5%;
   height: 12.5%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
-}
+} */
 
 #tog {
   margin: 40px 0px;
