@@ -54,6 +54,13 @@ body {
     grid-template-rows: repeat(8, [row] 8vw);
   }
 }
+
+@media screen and (max-width: 400px) {
+  #container {
+    grid-template-columns: repeat(8, [col] 8.5vw);
+    grid-template-rows: repeat(8, [row] 8.5vw);
+  }
+}
 /* .square {
   margin: 0.5px;
   width: 12.5%;
