@@ -44,12 +44,12 @@ document.addEventListener("DOMContentLoaded", function () {
   let evenColour = "#ebecd0";
   let oddColour = "#739552";
 
-  let rowNumber = 1;
+  let columnNumber = 1;
 
   //Start at one because once rowCounter hits 8 on the last square,
   // columnCounter will not increment again.
   //This is for an 8x8 grid.
-  let columnNumber = 1;
+  let rowNumber = 1;
 
   //let squares = document.querySelectorAll(".square");
 
@@ -75,9 +75,9 @@ document.addEventListener("DOMContentLoaded", function () {
   for (let i = 1; i < 65; i++) {
     //Reset the row counter. 8th square was created.
     //Column created, increment column counter.
-    if (rowNumber === 9) {
-      rowNumber = 1;
-      columnNumber++;
+    if (columnNumber === 9) {
+      columnNumber = 1;
+      rowNumber++;
     }
     let div = document.createElement("div");
     div.addEventListener("click", function () {
@@ -91,12 +91,19 @@ document.addEventListener("DOMContentLoaded", function () {
         // Highdivght the cdivcked square
         tempSquare = div;
         tempSquare.style.backgroundColor = "#ffff33";
+      } else {
+        console.log("Empty square");
+        if (tempSquare) {
+          console.log(
+            "Test - " + div.classList + " | | | | | " + tempSquare.innerHTML
+          );
+        }
       }
     });
 
     // Match the 8th square from the previous row
     if ((i - 1) % 8 === 0) isEven = !isEven;
-    div.className = `${columnNumber}${rowNumber % 10} ${
+    div.className = `${columnNumber % 10}${rowNumber} ${
       isEven ? "even" : "odd"
     } square`;
     isEven = !isEven;
@@ -138,146 +145,146 @@ document.addEventListener("DOMContentLoaded", function () {
     //   });
 
     //Black pieces row 1
-    if (i === 64 && columnNumber === 8) {
+    if (i === 64 && rowNumber === 8) {
       // placeholder
-      addImageToSquare(div, "Brook.png");
+      addImageToSquare(div, "Wrook.png");
     }
-    if (i === 63 && columnNumber === 8) {
+    if (i === 63 && rowNumber === 8) {
       // placeholder
-      addImageToSquare(div, "Bknight.png");
+      addImageToSquare(div, "Wknight.png");
     }
-    if (i === 62 && columnNumber === 8) {
+    if (i === 62 && rowNumber === 8) {
       // placeholder
-      addImageToSquare(div, "Bbishop.png");
+      addImageToSquare(div, "Wbishop.png");
     }
-    if (i === 61 && columnNumber === 8) {
+    if (i === 61 && rowNumber === 8) {
       // placeholder
-      addImageToSquare(div, "Bqueen.png");
+      addImageToSquare(div, "Wqueen.png");
     }
-    if (i === 60 && columnNumber === 8) {
+    if (i === 60 && rowNumber === 8) {
       // placeholder
-      addImageToSquare(div, "Bking.png");
+      addImageToSquare(div, "Wking.png");
     }
-    if (i === 59 && columnNumber === 8) {
+    if (i === 59 && rowNumber === 8) {
       // placeholder
-      addImageToSquare(div, "Bbishop.png");
+      addImageToSquare(div, "Wbishop.png");
     }
-    if (i === 58 && columnNumber === 8) {
+    if (i === 58 && rowNumber === 8) {
       // placeholder
-      addImageToSquare(div, "Bknight.png");
+      addImageToSquare(div, "Wknight.png");
     }
-    if (i === 57 && columnNumber === 8) {
+    if (i === 57 && rowNumber === 8) {
       // placeholder
-      addImageToSquare(div, "Brook.png");
+      addImageToSquare(div, "Wrook.png");
     }
     // Black pieces row 2
-    if (i === 49 && columnNumber === 7) {
+    if (i === 49 && rowNumber === 7) {
       // placeholder
-      addImageToSquare(div, "Bpawn.png");
+      addImageToSquare(div, "Wpawn.png");
     }
-    if (i === 50 && columnNumber === 7) {
+    if (i === 50 && rowNumber === 7) {
       // placeholder
-      addImageToSquare(div, "Bpawn.png");
+      addImageToSquare(div, "Wpawn.png");
     }
-    if (i === 51 && columnNumber === 7) {
+    if (i === 51 && rowNumber === 7) {
       // placeholder
-      addImageToSquare(div, "Bpawn.png");
+      addImageToSquare(div, "Wpawn.png");
     }
-    if (i === 52 && columnNumber === 7) {
+    if (i === 52 && rowNumber === 7) {
       // placeholder
-      addImageToSquare(div, "Bpawn.png");
+      addImageToSquare(div, "Wpawn.png");
     }
-    if (i === 53 && columnNumber === 7) {
+    if (i === 53 && rowNumber === 7) {
       // placeholder
-      addImageToSquare(div, "Bpawn.png");
+      addImageToSquare(div, "Wpawn.png");
     }
-    if (i === 54 && columnNumber === 7) {
+    if (i === 54 && rowNumber === 7) {
       // placeholder
-      addImageToSquare(div, "Bpawn.png");
+      addImageToSquare(div, "Wpawn.png");
     }
-    if (i === 55 && columnNumber === 7) {
+    if (i === 55 && rowNumber === 7) {
       // placeholder
-      addImageToSquare(div, "Bpawn.png");
+      addImageToSquare(div, "Wpawn.png");
     }
-    if (i === 56 && columnNumber === 7) {
+    if (i === 56 && rowNumber === 7) {
       // placeholder
-      addImageToSquare(div, "Bpawn.png");
+      addImageToSquare(div, "Wpawn.png");
     }
 
     // White pieces row 7
 
-    if (i === 1 && columnNumber === 1) {
+    if (i === 1 && rowNumber === 1) {
       // placeholder
-      addImageToSquare(div, "Wrook.png");
+      addImageToSquare(div, "Brook.png");
     }
-    if (i === 2 && columnNumber === 1) {
+    if (i === 2 && rowNumber === 1) {
       // placeholder
-      addImageToSquare(div, "Wknight.png");
+      addImageToSquare(div, "Bknight.png");
     }
-    if (i === 3 && columnNumber === 1) {
+    if (i === 3 && rowNumber === 1) {
       // placeholder
-      addImageToSquare(div, "Wbishop.png");
+      addImageToSquare(div, "Bbishop.png");
     }
-    if (i === 4 && columnNumber === 1) {
+    if (i === 4 && rowNumber === 1) {
       // placeholder
-      addImageToSquare(div, "Wqueen.png");
+      addImageToSquare(div, "Bqueen.png");
     }
-    if (i === 5 && columnNumber === 1) {
+    if (i === 5 && rowNumber === 1) {
       // placeholder
-      addImageToSquare(div, "Wking.png");
+      addImageToSquare(div, "Bking.png");
     }
-    if (i === 6 && columnNumber === 1) {
+    if (i === 6 && rowNumber === 1) {
       // placeholder
-      addImageToSquare(div, "Wbishop.png");
+      addImageToSquare(div, "Bbishop.png");
     }
-    if (i === 7 && columnNumber === 1) {
-      // placeholder
-      addImageToSquare(div, "Wknight.png");
+    if (i === 7 && rowNumber === 1) {
+      // rowNumber
+      addImageToSquare(div, "Bknight.png");
     }
-    if (i === 8 && columnNumber === 1) {
+    if (i === 8 && rowNumber === 1) {
       // placeholder
-      addImageToSquare(div, "Wrook.png");
+      addImageToSquare(div, "Brook.png");
     }
 
     // White pieces row 8
-    if (i === 16 && columnNumber === 2) {
+    if (i === 16 && rowNumber === 2) {
       // placeholder
-      addImageToSquare(div, "Wpawn.png");
+      addImageToSquare(div, "Bpawn.png");
     }
-    if (i === 15 && columnNumber === 2) {
+    if (i === 15 && rowNumber === 2) {
       // placeholder
-      addImageToSquare(div, "Wpawn.png");
+      addImageToSquare(div, "Bpawn.png");
     }
-    if (i === 14 && columnNumber === 2) {
+    if (i === 14 && rowNumber === 2) {
       // placeholder
-      addImageToSquare(div, "Wpawn.png");
+      addImageToSquare(div, "Bpawn.png");
     }
-    if (i === 13 && columnNumber === 2) {
+    if (i === 13 && rowNumber === 2) {
       // placeholder
-      addImageToSquare(div, "Wpawn.png");
+      addImageToSquare(div, "Bpawn.png");
     }
-    if (i === 12 && columnNumber === 2) {
+    if (i === 12 && rowNumber === 2) {
       // placeholder
-      addImageToSquare(div, "Wpawn.png");
+      addImageToSquare(div, "Bpawn.png");
     }
-    if (i === 11 && columnNumber === 2) {
+    if (i === 11 && rowNumber === 2) {
       // placeholder
-      addImageToSquare(div, "Wpawn.png");
+      addImageToSquare(div, "Bpawn.png");
     }
-    if (i === 10 && columnNumber === 2) {
+    if (i === 10 && rowNumber === 2) {
       // placeholder
-      addImageToSquare(div, "Wpawn.png");
+      addImageToSquare(div, "Bpawn.png");
     }
-    if (i === 9 && columnNumber === 2) {
+    if (i === 9 && rowNumber === 2) {
       // placeholder
-      addImageToSquare(div, "Wpawn.png");
+      addImageToSquare(div, "Bpawn.png");
     }
     //   div.appendChild(div);
     // }
     // chestPiecesdivst.appendChild(div); // Append the divst item to the chest-pieces divst
 
     chessBoard.appendChild(div);
-    rowNumber++;
+    columnNumber++;
   }
 
   //   // Drag and drop events
