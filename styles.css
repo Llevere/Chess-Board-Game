@@ -24,46 +24,34 @@ body {
   height: 100vh;
 }
 
-.container {
-  display: grid;
+#container {
+  /* display: grid;
   place-items: center;
   justify-content: center;
   width: 80%;
+  margin: 0 auto; */
+  display: grid;
+  grid-gap: 0;
+  grid-template-columns: repeat(8, [col] 5vw);
+  grid-template-rows: repeat(8, [row] 5vw);
+  border: 10px solid #b58863;
+  box-shadow: 0 5px 8px #777;
+  justify-content: center;
+  align-content: center;
   margin: 0 auto;
 }
-
-.row {
-  display: flex;
-}
-
-ul {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
-li {
-  list-style: none;
-  display: grid;
-  place-items: center;
-  font-size: 0;
+#container div {
+  width: 100%; /* Each cell takes up 1/8 of the container width */
+  height: 100%; /* Each cell takes up 1/8 of the container height */
 }
 
 .square {
   margin: 0.5px;
-  width: 75px;
-  height: 75px;
+  /* width: 75px;
+  height: 75px; */
+  width: 12.5%;
+  height: 12.5%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
-}
-
-h1 {
-  margin: 20px;
-  font-size: 2.5rem;
-  text-align: center;
-  color: black;
-  border: 2px solid black;
-  padding: 10px;
-  background-color: white;
-  border-radius: 5px;
 }
 
 #tog {
@@ -74,6 +62,20 @@ h1 {
   border: 2px solid #fff;
   padding: 10px;
   border-radius: 5px;
+}
+
+.square {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.even {
+  background-color: #ebecd0;
+}
+
+.odd {
+  background-color: #739552;
 }
 
 #reset-btn {
@@ -94,7 +96,7 @@ h1 {
   background-color: #007b00;
 }
 
-/* Animation when the button is pressed */
+/* Animation when the button is pressed
 @keyframes pressAnimation {
   0% {
     transform: scale(1);
@@ -105,13 +107,13 @@ h1 {
   100% {
     transform: scale(1);
   }
-}
+} */
 
 .selected {
   background-color: #ffff33;
 }
 
-@media screen and (max-width: 500px) {
+/* @media screen and (max-width: 500px) {
   .square {
     width: 35px;
     height: 35px;
@@ -121,4 +123,4 @@ h1 {
     height: 20px;
     width: 20px;
   }
-}
+} */

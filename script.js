@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let chestPiecesList = document.getElementById("chest-pieces");
-
+  let chestPiecesdivst = document.getElementById("chest-pieces");
+  let chessBoard = document.getElementById("container");
   // Function to create and append an image to a square
   function addImageToSquare(square, imageName) {
     let img = document.createElement("img");
@@ -9,7 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
     img.addEventListener("click", function (event) {
       console.log("Image clicked");
     });
-    // img.addEventListener("dragstart", function (event) {
+    img.style.height = "100%";
+    img.style.width = "100%";
+    // img.addEventdivstener("dragstart", function (event) {
     //   console.log("Image being dragged");
     //   event.dataTransfer.setData("text/plain", imageName);
     //   event.dataTransfer.setDragImage("./images/" + imageName, 25, 35);
@@ -35,216 +37,230 @@ document.addEventListener("DOMContentLoaded", function () {
   let evenColour = "#ebecd0";
   let oddColour = "#739552";
 
-  // Start at 1 to keep it readable (Column 1, Row 1)
-  for (let i = 1; i < 9; i++) {
+  let rowNumber = 1;
+
+  //Start at one because once rowCounter hits 8 on the last square,
+  // columnCounter will not increment again.
+  //This is for an 8x8 grid.
+  let columnNumber = 1;
+
+  let isEven = false;
+  for (let i = 1; i < 65; i++) {
+    //Reset the row counter. 8th square was created.
+    //Column created, increment column counter.
+    if (rowNumber === 9) {
+      rowNumber = 1;
+      columnNumber++;
+    }
     let div = document.createElement("div");
 
-    // Row
-    div.className = `${i} row`;
+    // Match the 8th square from the previous row
+    if ((i - 1) % 8 === 0) isEven = !isEven;
+    div.className = `${columnNumber}${rowNumber % 10} ${
+      isEven ? "even" : "odd"
+    }`;
+    isEven = !isEven;
+    //for (let j = 1; j < numOfColumns; j++) {
 
-    let isEven = i % 2 === 0;
-    const numOfColumns = 9;
-    for (let j = 1; j < numOfColumns; j++) {
-      let li = document.createElement("li");
+    //Create the coordinates on the board (Column : Row)
+    //div.className = `${j}${i} ${isEven ? "even" : "odd"} square`;
 
-      //Create the coordinates on the board (Row : Column)
-      li.className = `${i}${j} ${isEven ? "even" : "odd"} square`;
+    //div.style.backgroundColor = isEven ? evenColour : oddColour;
+    //div.style.border = `1px sodivd ${isEven ? "#ebecd0" : "#739552"}`;
 
-      li.style.backgroundColor = isEven ? evenColour : oddColour;
-      //li.style.border = `1px solid ${isEven ? "#ebecd0" : "#739552"}`;
-      li.style.border = "none";
-      li.style.margin = 0;
-      li.style.padding = 0;
-      //   li.style.width = "75px";
-      //   li.style.height = "75px";
-      isEven = !isEven;
-      //On the 8th column, switch tile colours
-      if (i % 2 === 0 && j === numOfColumns - 1) {
-        isEven = !isEven;
-      }
+    //   div.style.width = "75px";
+    //   div.style.height = "75px";
 
-      //   li.addEventListener("drop", function (event) {
-      //     event.preventDefault();
-      //     let imageName = event.dataTransfer.getData("text/plain");
-      //     let draggedImage = document.createElement("img");
-      //     draggedImage.src = "images/" + imageName;
+    //On the 8th column, switch tile colours
+    // if (i % 2 === 0 && j === numOfColumns - 1) {
+    //   isEven = !isEven;
+    // }
 
-      //     // // Swap images if the square already contains an image
-      //     if (li.children.length > 0) {
-      //       let existingImage = li.children[0];
-      //       li.removeChild(existingImage);
-      //       addImageToSquare(li, imageName);
-      //       draggedImage.src = existingImage.src;
-      //     }
-      //     li.appendChild(draggedImage);
-      //   });
+    //   div.addEventdivstener("drop", function (event) {
+    //     event.preventDefault();
+    //     let imageName = event.dataTransfer.getData("text/plain");
+    //     let draggedImage = document.createElement("img");
+    //     draggedImage.src = "images/" + imageName;
 
-      //   li.addEventListener("dragover", function (event) {
-      //     event.preventDefault();
-      //   });
+    //     // // Swap images if the square already contains an image
+    //     if (div.children.length > 0) {
+    //       let existingImage = div.children[0];
+    //       div.removeChild(existingImage);
+    //       addImageToSquare(div, imageName);
+    //       draggedImage.src = existingImage.src;
+    //     }
+    //     div.appendChild(draggedImage);
+    //   });
 
-      // Black pieces row 1
-      if (i === 1 && j === 1) {
-        // Row : Column
-        addImageToSquare(li, "Brook.png");
-      }
-      if (i === 1 && j === 2) {
-        // Row : Column
-        addImageToSquare(li, "Bknight.png");
-      }
-      if (i === 1 && j === 3) {
-        // Row : Column
-        addImageToSquare(li, "Bbishop.png");
-      }
-      if (i === 1 && j === 4) {
-        // Row : Column
-        addImageToSquare(li, "Bqueen.png");
-      }
-      if (i === 1 && j === 5) {
-        // Row : Column
-        addImageToSquare(li, "Bking.png");
-      }
-      if (i === 1 && j === 6) {
-        // Row : Column
-        addImageToSquare(li, "Bbishop.png");
-      }
-      if (i === 1 && j === 7) {
-        // Row : Column
-        addImageToSquare(li, "Bknight.png");
-      }
-      if (i === 1 && j === 8) {
-        // Row : Column
-        addImageToSquare(li, "Brook.png");
-      }
-      // Black pieces row 2
-      if (i === 2 && j === 1) {
-        // Row : Column
-        addImageToSquare(li, "Bpawn.png");
-      }
-      if (i === 2 && j === 2) {
-        // Row : Column
-        addImageToSquare(li, "Bpawn.png");
-      }
-      if (i === 2 && j === 3) {
-        // Row : Column
-        addImageToSquare(li, "Bpawn.png");
-      }
-      if (i === 2 && j === 4) {
-        // Row : Column
-        addImageToSquare(li, "Bpawn.png");
-      }
-      if (i === 2 && j === 5) {
-        // Row : Column
-        addImageToSquare(li, "Bpawn.png");
-      }
-      if (i === 2 && j === 6) {
-        // Row : Column
-        addImageToSquare(li, "Bpawn.png");
-      }
-      if (i === 2 && j === 7) {
-        // Row : Column
-        addImageToSquare(li, "Bpawn.png");
-      }
-      if (i === 2 && j === 8) {
-        // Row : Column
-        addImageToSquare(li, "Bpawn.png");
-      }
+    //   div.addEventdivstener("dragover", function (event) {
+    //     event.preventDefault();
+    //   });
 
-      // White pieces row 7
-
-      if (i === 7 && j === 1) {
-        // Row : Column
-        addImageToSquare(li, "Wrook.png");
-      }
-      if (i === 7 && j === 2) {
-        // Row : Column
-        addImageToSquare(li, "Wknight.png");
-      }
-      if (i === 7 && j === 3) {
-        // Row : Column
-        addImageToSquare(li, "Wbishop.png");
-      }
-      if (i === 7 && j === 4) {
-        // Row : Column
-        addImageToSquare(li, "Wqueen.png");
-      }
-      if (i === 7 && j === 5) {
-        // Row : Column
-        addImageToSquare(li, "Wking.png");
-      }
-      if (i === 7 && j === 6) {
-        // Row : Column
-        addImageToSquare(li, "Wbishop.png");
-      }
-      if (i === 7 && j === 7) {
-        // Row : Column
-        addImageToSquare(li, "Wknight.png");
-      }
-      if (i === 7 && j === 8) {
-        // Row : Column
-        addImageToSquare(li, "Wrook.png");
-      }
-
-      // White pieces row 8
-      if (i === 8 && j === 1) {
-        // Row : Column
-        addImageToSquare(li, "Wpawn.png");
-      }
-      if (i === 8 && j === 2) {
-        // Row : Column
-        addImageToSquare(li, "Wpawn.png");
-      }
-      if (i === 8 && j === 3) {
-        // Row : Column
-        addImageToSquare(li, "Wpawn.png");
-      }
-      if (i === 8 && j === 4) {
-        // Row : Column
-        addImageToSquare(li, "Wpawn.png");
-      }
-      if (i === 8 && j === 5) {
-        // Row : Column
-        addImageToSquare(li, "Wpawn.png");
-      }
-      if (i === 8 && j === 6) {
-        // Row : Column
-        addImageToSquare(li, "Wpawn.png");
-      }
-      if (i === 8 && j === 7) {
-        // Row : Column
-        addImageToSquare(li, "Wpawn.png");
-      }
-      if (i === 8 && j === 8) {
-        // Row : Column
-        addImageToSquare(li, "Wpawn.png");
-      }
-      div.appendChild(li);
+    //Black pieces row 1
+    if (i === 64 && columnNumber === 8) {
+      // placeholder
+      addImageToSquare(div, "Brook.png");
     }
-    chestPiecesList.appendChild(div); // Append the list item to the chest-pieces list
+    if (i === 63 && columnNumber === 8) {
+      // placeholder
+      addImageToSquare(div, "Bknight.png");
+    }
+    if (i === 62 && columnNumber === 8) {
+      // placeholder
+      addImageToSquare(div, "Bbishop.png");
+    }
+    if (i === 61 && columnNumber === 8) {
+      // placeholder
+      addImageToSquare(div, "Bqueen.png");
+    }
+    if (i === 60 && columnNumber === 8) {
+      // placeholder
+      addImageToSquare(div, "Bking.png");
+    }
+    if (i === 59 && columnNumber === 8) {
+      // placeholder
+      addImageToSquare(div, "Bbishop.png");
+    }
+    if (i === 58 && columnNumber === 8) {
+      // placeholder
+      addImageToSquare(div, "Bknight.png");
+    }
+    if (i === 57 && columnNumber === 8) {
+      // placeholder
+      addImageToSquare(div, "Brook.png");
+    }
+    // Black pieces row 2
+    if (i === 49 && columnNumber === 7) {
+      // placeholder
+      addImageToSquare(div, "Bpawn.png");
+    }
+    if (i === 50 && columnNumber === 7) {
+      // placeholder
+      addImageToSquare(div, "Bpawn.png");
+    }
+    if (i === 51 && columnNumber === 7) {
+      // placeholder
+      addImageToSquare(div, "Bpawn.png");
+    }
+    if (i === 52 && columnNumber === 7) {
+      // placeholder
+      addImageToSquare(div, "Bpawn.png");
+    }
+    if (i === 53 && columnNumber === 7) {
+      // placeholder
+      addImageToSquare(div, "Bpawn.png");
+    }
+    if (i === 54 && columnNumber === 7) {
+      // placeholder
+      addImageToSquare(div, "Bpawn.png");
+    }
+    if (i === 55 && columnNumber === 7) {
+      // placeholder
+      addImageToSquare(div, "Bpawn.png");
+    }
+    if (i === 56 && columnNumber === 7) {
+      // placeholder
+      addImageToSquare(div, "Bpawn.png");
+    }
+
+    // White pieces row 7
+
+    if (i === 1 && columnNumber === 1) {
+      // placeholder
+      addImageToSquare(div, "Wrook.png");
+    }
+    if (i === 2 && columnNumber === 1) {
+      // placeholder
+      addImageToSquare(div, "Wknight.png");
+    }
+    if (i === 3 && columnNumber === 1) {
+      // placeholder
+      addImageToSquare(div, "Wbishop.png");
+    }
+    if (i === 4 && columnNumber === 1) {
+      // placeholder
+      addImageToSquare(div, "Wqueen.png");
+    }
+    if (i === 5 && columnNumber === 1) {
+      // placeholder
+      addImageToSquare(div, "Wking.png");
+    }
+    if (i === 6 && columnNumber === 1) {
+      // placeholder
+      addImageToSquare(div, "Wbishop.png");
+    }
+    if (i === 7 && columnNumber === 1) {
+      // placeholder
+      addImageToSquare(div, "Wknight.png");
+    }
+    if (i === 8 && columnNumber === 1) {
+      // placeholder
+      addImageToSquare(div, "Wrook.png");
+    }
+
+    // White pieces row 8
+    if (i === 16 && columnNumber === 2) {
+      // placeholder
+      addImageToSquare(div, "Wpawn.png");
+    }
+    if (i === 15 && columnNumber === 2) {
+      // placeholder
+      addImageToSquare(div, "Wpawn.png");
+    }
+    if (i === 14 && columnNumber === 2) {
+      // placeholder
+      addImageToSquare(div, "Wpawn.png");
+    }
+    if (i === 13 && columnNumber === 2) {
+      // placeholder
+      addImageToSquare(div, "Wpawn.png");
+    }
+    if (i === 12 && columnNumber === 2) {
+      // placeholder
+      addImageToSquare(div, "Wpawn.png");
+    }
+    if (i === 11 && columnNumber === 2) {
+      // placeholder
+      addImageToSquare(div, "Wpawn.png");
+    }
+    if (i === 10 && columnNumber === 2) {
+      // placeholder
+      addImageToSquare(div, "Wpawn.png");
+    }
+    if (i === 9 && columnNumber === 2) {
+      // placeholder
+      addImageToSquare(div, "Wpawn.png");
+    }
+    //   div.appendChild(div);
+    // }
+    // chestPiecesdivst.appendChild(div); // Append the divst item to the chest-pieces divst
+
+    chessBoard.appendChild(div);
+    rowNumber++;
   }
 
   //   // Drag and drop events
-  //   chestPiecesList.addEventListener("dragstart", function (event) {
+  //   chestPiecesdivst.addEventdivstener("dragstart", function (event) {
   //     // Handle drag start
   //     console.log("Drag started");
   //   });
 
-  //   chestPiecesList.addEventListener("dragover", function (event) {
+  //   chestPiecesdivst.addEventdivstener("dragover", function (event) {
   //     // Handle drag over
   //     console.log("Drag over");
   //   });
 
-  //   chestPiecesList.addEventListener("drop", function (event) {
+  //   chestPiecesdivst.addEventdivstener("drop", function (event) {
   //     // Handle drop
   //     console.log("Drop");
   //   });
 
   //let resetButton = document.getElementById("reset-btn");
 
-  //   resetButton.addEventListener("click", function () {
+  //   resetButton.addEventdivstener("cdivck", function () {
   //     let btn = document.getElementById("reset-btn");
   //     btn.style.animation = "pressAnimation 0.2s ease";
-  //     btn.addEventListener("animationend", () => {
+  //     btn.addEventdivstener("animationend", () => {
   //       btn.style.animation = ""; // Reset animation after it ends
   //     });
 
@@ -265,16 +281,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
   squares.forEach((square) => {
     // Store the original background color of the square
-    originalSquareBgColors[square.classList[1]] = square.style.backgroundColor;
+    originalSquareBgColors[square.classdivst[1]] = square.style.backgroundColor;
 
-    square.addEventListener("click", function () {
-      // Revert the background color of the previously clicked square
+    square.addEventdivstener("cdivck", function () {
+      // Revert the background color of the previously cdivcked square
       if (tempSquare) {
         tempSquare.style.backgroundColor =
-          originalSquareBgColors[tempSquare.classList[1]];
+          originalSquareBgColors[tempSquare.classdivst[1]];
       }
 
-      // Highlight the clicked square
+      // Highdivght the cdivcked square
       tempSquare = square;
       tempSquare.style.backgroundColor = "#ffff33";
     });
