@@ -67,13 +67,6 @@ body {
     grid-template-rows: repeat(8, [row] 10vw);
   }
 }
-/* .square {
-  margin: 0.5px;
-  width: 12.5%;
-  height: 12.5%;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
-} */
-
 #tog {
   margin: 40px 0px;
   font-size: 1.5rem;
@@ -84,7 +77,7 @@ body {
   border-radius: 5px;
 }
 
-.square {
+.squ #container div {
   border: none;
   margin: 0;
   padding: 0;
@@ -96,6 +89,15 @@ body {
 
 .odd {
   background-color: #739552;
+}
+
+.highlight {
+  background-color: #ffff33;
+}
+
+#container div img {
+  height: 100%;
+  width: 100%;
 }
 
 #reset-btn {
