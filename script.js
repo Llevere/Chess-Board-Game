@@ -301,6 +301,9 @@ document.addEventListener("DOMContentLoaded", function () {
 //   swappingFrom.classList.remove("highlight");
 // };
 moveToEmptySquare = (swappingFrom, swappingTo) => {
+  console.log("BEFORE SWAP");
+  console.log("From: " + swappingFrom.classList);
+  console.log("To: " + swappingTo.classList);
   const pieceClassName = swappingFrom.classList[3];
 
   if (isValidMove(pieceClassName, swappingFrom, swappingTo)) {
@@ -308,12 +311,19 @@ moveToEmptySquare = (swappingFrom, swappingTo) => {
     swappingFrom.removeChild(img);
     swappingTo.appendChild(img);
 
+    // Remove the class name "start" if it exists
+    swappingFrom.classList.remove("start");
+    swappingTo.classList.remove("start");
+
     swappingTo.classList.add(swappingFrom.classList[3]);
     swappingFrom.classList.remove(swappingFrom.classList[3]);
   } else {
     console.log("Invalid move for this piece!");
   }
 
+  console.log("AFTER SWAP");
+  console.log("From: " + swappingFrom.classList);
+  console.log("To: " + swappingTo.classList);
   swappingFrom.classList.remove("highlight");
   swappingTo.classList.remove("highlight");
   tempSquare.classList.remove("highlight");
@@ -323,17 +333,60 @@ moveToEmptySquare = (swappingFrom, swappingTo) => {
 moveToFilledSquare = (swappingFrom, swappingTo) => {
   let swappingFromImg = swappingFrom.querySelector("img");
   let swappingToImg = swappingTo.querySelector("img");
+  const pieceClassName = swappingFrom.classList[3];
+  console.log("From: " + swappingFrom.classList);
+  console.log("To: " + swappingTo.classList);
+  if (isValidMove(pieceClassName, swappingFrom, swappingTo)) {
+    /* 
+      Check for the first character, it indicates the colour
+      W = White
+      B = Black 
+      */
+    if (swappingFrom.classList[3][0] !== swappingTo.classList[3][0]) {
+      console.log("Swapping different colours.");
+      if (swappingFromImg && swappingToImg) {
+        // Check if both squares have images
+        swappingFrom.removeChild(swappingFromImg);
+        swappingTo.removeChild(swappingToImg);
 
-  // Check if both squares have images
-  if (swappingFromImg && swappingToImg) {
-    swappingFrom.removeChild(swappingFromImg);
-    swappingTo.removeChild(swappingToImg);
+        //swappingFrom.appendChild(swappingToImg);
+        swappingTo.appendChild(swappingFromImg);
 
-    swappingFrom.appendChild(swappingToImg);
-    swappingTo.appendChild(swappingFromImg);
+        // //
 
-    swappingTo.classList.add(swappingFrom.classList[3]);
-    swappingFrom.classList.remove(swappingFrom.classList[3]);
+        // /* [3] = chess piece */
+        // //swappingTo.classList.remove(swappingTo.classList[3]);
+
+        // /* Check for "starting", pawns start with this in their class name,
+        // which will be the 4th index */
+        // if (swappingTo.classList.contains("starts")) {
+        //   // Chess piece is a pawn and has not moved from its initial position.
+
+        //   //Remove the "start" class name
+        //   swappingFrom.classList.remove(swappingTo.classList[3]);
+        //   swappingTo.classList.add(swappingFrom.classList[3]);
+        // }
+        // if (swappingFrom.classList.contains("start")) {
+        //   // Chess piece is a pawn and has not moved from its initial position.
+        // }
+        console.log("BEFORE SWAP");
+        console.log("From: " + swappingFrom.classList);
+        console.log("To: " + swappingTo.classList);
+
+        console.log("Removing the class name start.");
+        swappingFrom.classList.remove("start");
+        swappingTo.classList.remove("start");
+
+        swappingTo.classList.remove(swappingTo.classList[3]);
+        swappingTo.classList.add(swappingFrom.classList[3]);
+        swappingFrom.classList.remove(swappingFrom.classList[3]);
+        console.log("AFTER SWAP");
+        console.log("From: " + swappingFrom.classList);
+        console.log("To: " + swappingTo.classList);
+      }
+    }
+  } else {
+    console.log("Invalid movement.");
   }
 
   tempSquare.classList.remove("highlight");
@@ -348,7 +401,6 @@ function isValidMove(pieceClassName, fromSquare, toSquare) {
   // Implement rules for each chess piece
   switch (pieceClassName.substring(1)) {
     case "rook":
-      console.log("Moving rook");
       // Implement rook movement rules
       return isValidRookMove(fromSquare, toSquare);
 
@@ -368,17 +420,14 @@ function isValidRookMove(fromSquare, toSquare) {
     let pieceFound = false;
     if (fromTileLocation.row > toTileLocation.row) {
       // Rook is moving up
+      console.log("Rook moving up.");
       for (let i = fromTileLocation.row - 1; i >= toTileLocation.row; i--) {
         if (
           document.getElementById(`${fromTileLocation.column}${i}`).children
             .length > 0
         ) {
           if (i === toTileLocation.row) {
-            console.log(
-              "Clicking on a tile with an image! Checking what image is inside."
-            );
-
-            console.log(toSquare.querySelector("img"));
+            return true;
           }
           pieceFound = true;
           break;
@@ -386,18 +435,27 @@ function isValidRookMove(fromSquare, toSquare) {
       }
     } else {
       // Rook is moving down
-      for (let i = fromTileLocation.row; i > toTileLocation.row; i--) {
+      console.log("Rook moving down.");
+      console.log(
+        "Checking: " +
+          `${fromTileLocation.column}${fromTileLocation.row} to ${toTileLocation.column}${toTileLocation.row}`
+      );
+      for (let i = fromTileLocation.row + 1; i <= toTileLocation.row; i++) {
+        console.log("Checking: " + `${fromTileLocation.column}${i}`);
         if (
           document.getElementById(`${fromTileLocation.column}${i}`).children
             .length > 0
         ) {
+          if (i === toTileLocation.row) {
+            return true;
+          }
           pieceFound = true;
           break;
         }
       }
     }
     if (!pieceFound) {
-      console.log("No chess piece found, rook can move to location.");
+      //console.log("No chess piece found, rook can move to location.");
       return true;
     }
   } else if (fromTileLocation.row === toTileLocation.row) {
@@ -410,10 +468,14 @@ function isValidRookMove(fromSquare, toSquare) {
         i >= toTileLocation.column;
         i--
       ) {
+        //Check column : row to see if the square has an image (filled square)
         if (
-          document.getElementById(`${fromTileLocation.column}${i}`).children
+          document.getElementById(`${i}${fromTileLocation.row}`).children
             .length > 0
         ) {
+          if (i === toTileLocation.row) {
+            return true;
+          }
           pieceFound = true;
           break;
         }
@@ -425,23 +487,34 @@ function isValidRookMove(fromSquare, toSquare) {
         i <= toTileLocation.column;
         i++
       ) {
+        //Check column : row to see if the square has an image (filled square)
         if (
-          document.getElementById(`${fromTileLocation.column}${i}`).children
+          document.getElementById(`${i}${fromTileLocation.row}`).children
             .length > 0
         ) {
+          if (i === toTileLocation.row) {
+            return true;
+          }
           pieceFound = true;
           break;
         }
       }
     }
     if (!pieceFound) {
-      console.log("No chess piece found, rook can move to location.");
       return true;
     }
   } else {
     return false; // Invalid move
   }
 }
+
+const isThirdIndexChessPiece = (chessPiece) => {
+  // Return if the 3rd index starts with W or B (indicating it's black or white).
+  // If returns false, it means the 3rd index in the class name is not a chess piece.
+  return (
+    chessPiece.classList[3][0] === "W" || chessPiece.classList[3][0] === "B"
+  );
+};
 
 function tileLocator(square) {
   // Assuming class name format is "XY" where X is the column and Y is the row
