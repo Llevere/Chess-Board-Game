@@ -405,6 +405,8 @@ function isValidMove(pieceClassName, fromSquare, toSquare) {
       return isValidRookMove(fromSquare, toSquare);
     case "pawn":
       return isValidPawnMove(fromSquare, toSquare);
+    case "knight":
+      return isValidKnightMove(fromSquare, toSquare);
     // Add cases for other chess pieces
 
     default:
