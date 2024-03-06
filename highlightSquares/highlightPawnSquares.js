@@ -1,11 +1,153 @@
+// function highlightPawnSquares(position) {
+//   const fromTileLocation = tileLocator(position);
+
+//   const fromColour = position.classList[3][0];
+
+//   if (position.classList.contains("start")) {
+//     if (fromColour === "W") {
+//       if (
+//         !(
+//           document.getElementById(
+//             `${fromTileLocation.column}${fromTileLocation.row - 2}`
+//           ).children.length > 0
+//         )
+//       ) {
+//         document
+//           .getElementById(
+//             `${fromTileLocation.column}${fromTileLocation.row - 2}`
+//           )
+//           .classList.add("hint");
+//       }
+//       if (
+//         !(
+//           document.getElementById(
+//             `${fromTileLocation.column}${fromTileLocation.row - 1}`
+//           ).children.length > 0
+//         )
+//       ) {
+//         document
+//           .getElementById(
+//             `${fromTileLocation.column}${fromTileLocation.row - 1}`
+//           )
+//           .classList.add("hint");
+//       }
+//     }
+//     if (fromColour === "B") {
+//       if (
+//         !(
+//           document.getElementById(
+//             `${fromTileLocation.column}${fromTileLocation.row + 2}`
+//           ).children.length > 0
+//         )
+//       ) {
+//         document
+//           .getElementById(
+//             `${fromTileLocation.column}${fromTileLocation.row + 2}`
+//           )
+//           .classList.add("hint");
+//       }
+//       if (
+//         !(
+//           document.getElementById(
+//             `${fromTileLocation.column}${fromTileLocation.row + 1}`
+//           ).children.length > 0
+//         )
+//       ) {
+//         document
+//           .getElementById(
+//             `${fromTileLocation.column}${fromTileLocation.row + 1}`
+//           )
+//           .classList.add("hint");
+//       }
+//     }
+//   }
+//   if (fromColour === "W") {
+//     //One square up
+//     if (
+//       !(
+//         document.getElementById(
+//           `${fromTileLocation.column}${fromTileLocation.row - 1}`
+//         ).children.length > 0
+//       )
+//     ) {
+//       document
+//         .getElementById(`${fromTileLocation.column}${fromTileLocation.row - 1}`)
+//         .classList.add("hint");
+//     }
+
+//     //Up + Left
+//     if (
+//       document.getElementById(
+//         `${fromTileLocation.column - 1}${fromTileLocation.row - 1}`
+//       ).children.length > 0
+//     ) {
+//       document
+//         .getElementById(
+//           `${fromTileLocation.column - 1}${fromTileLocation.row - 1}`
+//         )
+//         .classList.add("attack");
+//     }
+//     //Up + Right
+//     if (
+//       document.getElementById(
+//         `${fromTileLocation.column + 1}${fromTileLocation.row - 1}`
+//       ).children.length > 0
+//     ) {
+//       document
+//         .getElementById(
+//           `${fromTileLocation.column + 1}${fromTileLocation.row - 1}`
+//         )
+//         .classList.add("attack");
+//     }
+//   }
+//   if (fromColour === "B") {
+//     if (
+//       !(
+//         document.getElementById(
+//           `${fromTileLocation.column}${fromTileLocation.row + 1}`
+//         ).children.length > 0
+//       )
+//     ) {
+//       document
+//         .getElementById(`${fromTileLocation.column}${fromTileLocation.row + 1}`)
+//         .classList.add("hint");
+//     }
+
+//     //Down + Left
+//     if (
+//       document.getElementById(
+//         `${fromTileLocation.column - 1}${fromTileLocation.row + 1}`
+//       ).children.length > 0
+//     ) {
+//       document
+//         .getElementById(
+//           `${fromTileLocation.column - 1}${fromTileLocation.row + 1}`
+//         )
+//         .classList.add("attack");
+//     }
+//     //Down + Right
+//     if (
+//       document.getElementById(
+//         `${fromTileLocation.column + 1}${fromTileLocation.row + 1}`
+//       ).children.length > 0
+//     ) {
+//       document
+//         .getElementById(
+//           `${fromTileLocation.column + 1}${fromTileLocation.row + 1}`
+//         )
+//         .classList.add("attack");
+//     }
+//   }
+// }
+
 function highlightPawnSquares(position) {
   const fromTileLocation = tileLocator(position);
-
   const fromColour = position.classList[3][0];
 
   if (position.classList.contains("start")) {
     if (fromColour === "W") {
       if (
+        fromTileLocation.row - 2 >= 1 &&
         !(
           document.getElementById(
             `${fromTileLocation.column}${fromTileLocation.row - 2}`
@@ -19,6 +161,7 @@ function highlightPawnSquares(position) {
           .classList.add("hint");
       }
       if (
+        fromTileLocation.row - 1 >= 1 &&
         !(
           document.getElementById(
             `${fromTileLocation.column}${fromTileLocation.row - 1}`
@@ -31,9 +174,9 @@ function highlightPawnSquares(position) {
           )
           .classList.add("hint");
       }
-    }
-    if (fromColour === "B") {
+    } else if (fromColour === "B") {
       if (
+        fromTileLocation.row + 2 <= 8 &&
         !(
           document.getElementById(
             `${fromTileLocation.column}${fromTileLocation.row + 2}`
@@ -47,6 +190,7 @@ function highlightPawnSquares(position) {
           .classList.add("hint");
       }
       if (
+        fromTileLocation.row + 1 <= 8 &&
         !(
           document.getElementById(
             `${fromTileLocation.column}${fromTileLocation.row + 1}`
@@ -61,9 +205,11 @@ function highlightPawnSquares(position) {
       }
     }
   }
+
   if (fromColour === "W") {
     //One square up
     if (
+      fromTileLocation.row - 1 >= 1 &&
       !(
         document.getElementById(
           `${fromTileLocation.column}${fromTileLocation.row - 1}`
@@ -77,9 +223,14 @@ function highlightPawnSquares(position) {
 
     //Up + Left
     if (
+      fromTileLocation.column - 1 >= 1 &&
+      fromTileLocation.row - 1 >= 1 &&
       document.getElementById(
         `${fromTileLocation.column - 1}${fromTileLocation.row - 1}`
-      ).children.length > 0
+      ).children.length > 0 &&
+      document.getElementById(
+        `${fromTileLocation.column - 1}${fromTileLocation.row - 1}`
+      ).classList[3][0] !== fromColour
     ) {
       document
         .getElementById(
@@ -89,9 +240,14 @@ function highlightPawnSquares(position) {
     }
     //Up + Right
     if (
+      fromTileLocation.column + 1 <= 8 &&
+      fromTileLocation.row - 1 >= 1 &&
       document.getElementById(
         `${fromTileLocation.column + 1}${fromTileLocation.row - 1}`
-      ).children.length > 0
+      ).children.length > 0 &&
+      document.getElementById(
+        `${fromTileLocation.column + 1}${fromTileLocation.row - 1}`
+      ).classList[3][0] !== fromColour
     ) {
       document
         .getElementById(
@@ -99,9 +255,9 @@ function highlightPawnSquares(position) {
         )
         .classList.add("attack");
     }
-  }
-  if (fromColour === "B") {
+  } else if (fromColour === "B") {
     if (
+      fromTileLocation.row + 1 <= 8 &&
       !(
         document.getElementById(
           `${fromTileLocation.column}${fromTileLocation.row + 1}`
@@ -115,9 +271,14 @@ function highlightPawnSquares(position) {
 
     //Down + Left
     if (
+      fromTileLocation.column - 1 >= 1 &&
+      fromTileLocation.row + 1 <= 8 &&
       document.getElementById(
         `${fromTileLocation.column - 1}${fromTileLocation.row + 1}`
-      ).children.length > 0
+      ).children.length > 0 &&
+      document.getElementById(
+        `${fromTileLocation.column - 1}${fromTileLocation.row + 1}`
+      ).classList[3][0] !== fromColour
     ) {
       document
         .getElementById(
@@ -127,9 +288,14 @@ function highlightPawnSquares(position) {
     }
     //Down + Right
     if (
+      fromTileLocation.column + 1 <= 8 &&
+      fromTileLocation.row + 1 <= 8 &&
       document.getElementById(
         `${fromTileLocation.column + 1}${fromTileLocation.row + 1}`
-      ).children.length > 0
+      ).children.length > 0 &&
+      document.getElementById(
+        `${fromTileLocation.column + 1}${fromTileLocation.row + 1}`
+      ).classList[3][0] !== fromColour
     ) {
       document
         .getElementById(
