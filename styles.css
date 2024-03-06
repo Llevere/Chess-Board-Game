@@ -161,9 +161,16 @@ body {
   }
 } */
 .hint {
-  background-color: orange;
+  background-color: #9eff9d; /* Light green */
+  border: 1px solid #4caf50; /* Darker green border */
+  opacity: 0.8; /* Adjust opacity to make it less intense */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add shadow effect */
 }
 
+/* Attacking squares */
 .attack {
-  background-color: coral;
+  background-color: #ffcccc; /* Light red */
+  border: 1px solid #ff5733; /* Darker red border */
+  opacity: 0.8; /* Adjust opacity */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Add shadow effect */
 }
