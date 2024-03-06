@@ -85,7 +85,7 @@ function highlightPawnSquares(position) {
         .getElementById(
           `${fromTileLocation.column - 1}${fromTileLocation.row - 1}`
         )
-        .classList.add("hint");
+        .classList.add("attack");
     }
     //Up + Right
     if (
@@ -97,7 +97,7 @@ function highlightPawnSquares(position) {
         .getElementById(
           `${fromTileLocation.column + 1}${fromTileLocation.row - 1}`
         )
-        .classList.add("hint");
+        .classList.add("attack");
     }
   }
   if (fromColour === "B") {
@@ -123,7 +123,7 @@ function highlightPawnSquares(position) {
         .getElementById(
           `${fromTileLocation.column - 1}${fromTileLocation.row + 1}`
         )
-        .classList.add("hint");
+        .classList.add("attack");
     }
     //Down + Right
     if (
@@ -135,7 +135,7 @@ function highlightPawnSquares(position) {
         .getElementById(
           `${fromTileLocation.column + 1}${fromTileLocation.row + 1}`
         )
-        .classList.add("hint");
+        .classList.add("attack");
     }
   }
 }

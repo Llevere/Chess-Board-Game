@@ -494,6 +494,7 @@ function resetHighlightedSquares() {
   const squares = document.querySelectorAll(".square");
   squares.forEach((square) => {
     square.classList.remove("hint");
+    square.classList.remove("attack");
     square.style.backgroundColor = originalSquareBgColors[square.id];
   });
 }
