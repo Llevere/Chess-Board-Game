@@ -9,6 +9,35 @@ function isValidPawnMove(fromSquare, toSquare) {
   const fromTileLocation = tileLocator(fromSquare);
   const toTileLocation = tileLocator(toSquare);
 
+  const fromColour = fromSquare.classList[3][0];
+
+  if (fromSquare.classList.contains("start")) {
+    if (fromColour === "W") {
+      if (
+        !(
+          document.getElementById(
+            `${fromTileLocation.column}${fromTileLocation.row - 2}`
+          ).children.length > 0
+        )
+      ) {
+        document.getElementById(
+          `${fromTileLocation.column}${fromTileLocation.row - 2}`
+        ).style.backgroundColor = "orange";
+      }
+      if (
+        !(
+          document.getElementById(
+            `${fromTileLocation.column}${fromTileLocation.row - 1}`
+          ).children.length > 0
+        )
+      ) {
+        document.getElementById(
+          `${fromTileLocation.column}${fromTileLocation.row - 1}`
+        ).style.backgroundColor = "orange";
+      }
+    }
+  }
+
   if (
     fromTileLocation.column - toTileLocation.column > 2 ||
     toTileLocation.column - fromTileLocation.column > 2 ||

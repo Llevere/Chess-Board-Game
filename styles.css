@@ -32,8 +32,8 @@ body {
   margin: 0 auto; */
   display: grid;
   grid-gap: 0;
-  grid-template-columns: repeat(8, [col] clamp(3vw, 5vw, 6vw));
-  grid-template-rows: repeat(8, [row] 5vw);
+  grid-template-columns: repeat(8, [col] clamp(3vw, 5.5vw, 6vw));
+  grid-template-rows: repeat(8, [row] 5.5vw);
   border: 10px solid #b58863;
   box-shadow: 0 5px 8px #777;
   justify-content: center;
@@ -77,7 +77,21 @@ body {
   border-radius: 5px;
 }
 
-.squ #container div {
+.top-left {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  color: #fff; /* Change color to match the opposite of square color */
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  color: #000; /* Change color to match the opposite of square color */
+}
+
+.square #container div {
   border: none;
   margin: 0;
   padding: 0;
@@ -146,3 +160,6 @@ body {
     width: 20px;
   }
 } */
+.hint {
+  background-color: orange;
+}

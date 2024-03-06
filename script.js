@@ -47,6 +47,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     div.addEventListener("click", function () {
       if (tempSquare !== div) {
+        if (!tempSquare && div.classList[3][0] === currentPlayer) {
+          giveHints(div);
+        }
         if (div.children.length > 0) {
           // Revert the background color of the previously clicked square
           if (tempSquare) {
@@ -81,15 +84,14 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         tempSquare.classList.remove("highlight");
         tempSquare = null;
+        resetHighlightedSquares();
       }
     });
 
     // Match the 8th square from the previous row
     if ((i - 1) % 8 === 0) isEven = !isEven;
-    // div.className = `${columnNumber % 10}${rowNumber} ${
-    //   isEven ? "even" : "odd"
-    // } square`;
     div.id = `${columnNumber % 10}${rowNumber}`;
+
     //[0] = (Column : Row) - What tile it is.
     //Example: 31 = Column 3 : Row 1
     div.classList.add(`${columnNumber % 10}${rowNumber}`);
@@ -97,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
     div.classList.add(`${isEven ? "even" : "odd"}`);
     div.classList.add("square");
     isEven = !isEven;
-    originalSquareBgColors[div.classList[0]] = div.style.backgroundColor;
+    originalSquareBgColors[div.id] = div.style.backgroundColor;
 
     //Black pieces row 1
     if (i === 64 && rowNumber === 8) {
@@ -344,6 +346,29 @@ moveToEmptySquare = (swappingFrom, swappingTo) => {
   swappingTo.classList.remove("highlight");
   tempSquare.classList.remove("highlight");
   tempSquare = null;
+  resetHighlightedSquares();
+};
+
+giveHints = (piecePosition) => {
+  switch (piecePosition.classList[3].substring(1)) {
+    case "rook":
+      // Implement rook movement rules
+      return highlightRookSquares(piecePosition);
+    case "pawn":
+      return highlightPawnSquares(piecePosition);
+    case "knight":
+      return highlightKnightSquares(piecePosition);
+    case "bishop":
+      return highlightBishopSquares(piecePosition);
+    case "king":
+      return highlightKingSquares(piecePosition);
+    case "queen":
+      return highlightQueenSquares(piecePosition);
+
+    default:
+      console.log("None of the cases were met in 'giveHints'");
+      return false; // A chess piece was not found
+  }
 };
 
 moveToFilledSquare = (swappingFrom, swappingTo) => {
@@ -421,6 +446,7 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
 
   swappingFrom.classList.remove("highlight");
   swappingTo.classList.remove("highlight");
+  resetHighlightedSquares();
 };
 
 function isValidMove(pieceClassName, fromSquare, toSquare) {
@@ -462,4 +488,12 @@ function tileLocator(square) {
   const row = parseInt(className[1]);
 
   return { column, row };
+}
+
+function resetHighlightedSquares() {
+  const squares = document.querySelectorAll(".square");
+  squares.forEach((square) => {
+    square.classList.remove("hint");
+    square.style.backgroundColor = originalSquareBgColors[square.id];
+  });
 }
