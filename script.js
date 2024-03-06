@@ -58,7 +58,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (
               tempSquare.children.length > 0 &&
-              tempSquare.classList[3][0] === currentPlayer
+              tempSquare.classList[3][0] === currentPlayer &&
+              tempSquare.classList[3][0] !== div.classList[3][0]
             ) {
               moveToFilledSquare(tempSquare, div);
               tempSquare = null;
@@ -377,14 +378,14 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
   const pieceClassName = swappingFrom.classList[3];
   // console.log("From: " + swappingFrom.classList);
   // console.log("To: " + swappingTo.classList);
-  if (isValidMove(pieceClassName, swappingFrom, swappingTo)) {
-    /* 
+  if (swappingFrom.classList[3][0] !== swappingTo.classList[3][0]) {
+    if (isValidMove(pieceClassName, swappingFrom, swappingTo)) {
+      /* 
       Check for the first character, it indicates the colour
       W = White
       B = Black 
       */
 
-    if (swappingFrom.classList[3][0] !== swappingTo.classList[3][0]) {
       console.log("Swapping different colours.");
       if (swappingFromImg && swappingToImg) {
         // Check if both squares have images
@@ -428,15 +429,16 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
         console.log("AFTER SWAP");
         console.log("From: " + swappingFrom.classList);
         console.log("To: " + swappingTo.classList);
+
+        console.log(
+          "Swapping classList -> -> -> From: " +
+            swappingFrom.classList[3][0] +
+            " -> -> To: " +
+            swappingTo.classList[3][0]
+        );
+        currentPlayer = currentPlayer === "W" ? "B" : "W";
       }
     }
-    console.log(
-      "Swapping classList -> -> -> From: " +
-        swappingFrom.classList[3][0] +
-        " -> -> To: " +
-        swappingTo.classList[3][0]
-    );
-    currentPlayer = currentPlayer === "W" ? "B" : "W";
   } else {
     console.log("Invalid movement.");
   }
