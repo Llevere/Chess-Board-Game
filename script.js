@@ -334,8 +334,8 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
   let swappingFromImg = swappingFrom.querySelector("img");
   let swappingToImg = swappingTo.querySelector("img");
   const pieceClassName = swappingFrom.classList[3];
-  console.log("From: " + swappingFrom.classList);
-  console.log("To: " + swappingTo.classList);
+  // console.log("From: " + swappingFrom.classList);
+  // console.log("To: " + swappingTo.classList);
   if (isValidMove(pieceClassName, swappingFrom, swappingTo)) {
     /* 
       Check for the first character, it indicates the colour
@@ -369,9 +369,9 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
         // if (swappingFrom.classList.contains("start")) {
         //   // Chess piece is a pawn and has not moved from its initial position.
         // }
-        console.log("BEFORE SWAP");
-        console.log("From: " + swappingFrom.classList);
-        console.log("To: " + swappingTo.classList);
+        // console.log("BEFORE SWAP");
+        // console.log("From: " + swappingFrom.classList);
+        // console.log("To: " + swappingTo.classList);
 
         console.log("Removing the class name start.");
         swappingFrom.classList.remove("start");
@@ -380,9 +380,9 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
         swappingTo.classList.remove(swappingTo.classList[3]);
         swappingTo.classList.add(swappingFrom.classList[3]);
         swappingFrom.classList.remove(swappingFrom.classList[3]);
-        console.log("AFTER SWAP");
-        console.log("From: " + swappingFrom.classList);
-        console.log("To: " + swappingTo.classList);
+        // console.log("AFTER SWAP");
+        // console.log("From: " + swappingFrom.classList);
+        // console.log("To: " + swappingTo.classList);
       }
     }
   } else {
@@ -407,10 +407,16 @@ function isValidMove(pieceClassName, fromSquare, toSquare) {
       return isValidPawnMove(fromSquare, toSquare);
     case "knight":
       return isValidKnightMove(fromSquare, toSquare);
-    // Add cases for other chess pieces
+    case "bishop":
+      return isValidBishopMove(fromSquare, toSquare);
+    case "king":
+      return isValidKingMove(fromSquare, toSquare);
+    case "queen":
+      return isValidQueenMove(fromSquare, toSquare);
 
     default:
-      return true; // A chess piece was not found
+      console.log("None of the cases were met in 'isValidMove'");
+      return false; // A chess piece was not found
   }
 }
 

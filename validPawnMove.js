@@ -108,7 +108,7 @@ function isValidPawnMove(fromSquare, toSquare) {
       return false;
     }
 
-    //No piece found within onee square, valid move.
+    //No piece found within one square, valid move.
     return true;
   }
 
@@ -130,6 +130,13 @@ function isValidPawnMove(fromSquare, toSquare) {
       );
       return false;
     }
+
+    if (
+      document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
+        .children.length > 0
+    ) {
+      return true;
+    }
   }
   if (fromSquare.classList[3][0] === "W") {
     if (
@@ -141,7 +148,14 @@ function isValidPawnMove(fromSquare, toSquare) {
       );
       return false;
     }
-  }
 
-  return true;
+    if (
+      document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
+        .children.length > 0
+    ) {
+      return true;
+    }
+  }
+  console.log("Returning false - line 153");
+  return false;
 }
