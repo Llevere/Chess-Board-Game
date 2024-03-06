@@ -5,6 +5,8 @@ let tempSquare = null;
 let tempSquareBgColour = "";
 let originalSquareBgColors = {};
 
+let currentPlayer = "W";
+
 document.addEventListener("DOMContentLoaded", function () {
   let chestPiecesdivst = document.getElementById("chest-pieces");
   let chessBoard = document.getElementById("container");
@@ -51,19 +53,28 @@ document.addEventListener("DOMContentLoaded", function () {
             tempSquare.style.backgroundColor =
               originalSquareBgColors[tempSquare.classList[0]];
 
-            if (tempSquare.children.length > 0) {
+            if (
+              tempSquare.children.length > 0 &&
+              tempSquare.classList[3][0] === currentPlayer
+            ) {
               moveToFilledSquare(tempSquare, div);
               tempSquare = null;
             }
           } else {
-            // highlight the clicked square
-            tempSquare = div;
-            // tempSquare.style.backgroundColor = "#ffff33";
-            tempSquare.classList.add("highlight");
+            if (div.classList[3][0] === currentPlayer) {
+              // highlight the clicked square
+              tempSquare = div;
+              // tempSquare.style.backgroundColor = "#ffff33";
+              tempSquare.classList.add("highlight");
+            }
           }
         } else {
           //Square picked has an image as a child
-          if (tempSquare && tempSquare.children.length > 0) {
+          if (
+            tempSquare &&
+            tempSquare.children.length > 0 &&
+            tempSquare.classList[3][0] === currentPlayer
+          ) {
             moveToEmptySquare(tempSquare, div);
           }
         }
@@ -307,6 +318,9 @@ moveToEmptySquare = (swappingFrom, swappingTo) => {
   const pieceClassName = swappingFrom.classList[3];
 
   if (isValidMove(pieceClassName, swappingFrom, swappingTo)) {
+    console.log(
+      "SWAPPING EMPTY SPACE SQAURES ----------------------------------"
+    );
     let img = swappingFrom.querySelector("img");
     swappingFrom.removeChild(img);
     swappingTo.appendChild(img);
@@ -317,6 +331,8 @@ moveToEmptySquare = (swappingFrom, swappingTo) => {
 
     swappingTo.classList.add(swappingFrom.classList[3]);
     swappingFrom.classList.remove(swappingFrom.classList[3]);
+
+    currentPlayer = currentPlayer === "W" ? "B" : "W";
   } else {
     console.log("Invalid move for this piece!");
   }
@@ -342,6 +358,7 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
       W = White
       B = Black 
       */
+
     if (swappingFrom.classList[3][0] !== swappingTo.classList[3][0]) {
       console.log("Swapping different colours.");
       if (swappingFromImg && swappingToImg) {
@@ -369,9 +386,12 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
         // if (swappingFrom.classList.contains("start")) {
         //   // Chess piece is a pawn and has not moved from its initial position.
         // }
-        // console.log("BEFORE SWAP");
-        // console.log("From: " + swappingFrom.classList);
-        // console.log("To: " + swappingTo.classList);
+        console.log(
+          "SWAPPING TWO FILLED SQAURES ----------------------------------"
+        );
+        console.log("BEFORE SWAP");
+        console.log("From: " + swappingFrom.classList);
+        console.log("To: " + swappingTo.classList);
 
         console.log("Removing the class name start.");
         swappingFrom.classList.remove("start");
@@ -380,11 +400,18 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
         swappingTo.classList.remove(swappingTo.classList[3]);
         swappingTo.classList.add(swappingFrom.classList[3]);
         swappingFrom.classList.remove(swappingFrom.classList[3]);
-        // console.log("AFTER SWAP");
-        // console.log("From: " + swappingFrom.classList);
-        // console.log("To: " + swappingTo.classList);
+        console.log("AFTER SWAP");
+        console.log("From: " + swappingFrom.classList);
+        console.log("To: " + swappingTo.classList);
       }
     }
+    console.log(
+      "Swapping classList -> -> -> From: " +
+        swappingFrom.classList[3][0] +
+        " -> -> To: " +
+        swappingTo.classList[3][0]
+    );
+    currentPlayer = currentPlayer === "W" ? "B" : "W";
   } else {
     console.log("Invalid movement.");
   }
