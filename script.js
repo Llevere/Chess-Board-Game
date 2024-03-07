@@ -449,7 +449,7 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
         playersTurnTitle.style.color =
           currentPlayer === "W" ? "Black" : "White";
         playersTurnTitle.textContent =
-          currentPlayer === "W" ? "Whiteeeee" : "Blackeeeee";
+          currentPlayer === "W" ? "White's Turn" : "Black's Turn";
         //playersTurnTitle.style.color = currentPlayer === "W" ? "Red" : "Green";
       }
     }
