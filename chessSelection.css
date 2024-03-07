@@ -84,3 +84,27 @@
   border: 1px solid black;
   padding: 5px;
 }
+
+@media screen and (max-width: 650px) {
+  #bottom-controls,
+  #top-controls {
+    position: relative;
+    display: flex; /* Change display to flex */
+    flex-direction: row; /* Stack child elements vertically */
+    align-items: center; /* Center child elements horizontally */
+    margin: 2.5vw;
+  }
+
+  /* Adjust the height of the child options */
+  .set-white-options,
+  .set-black-options {
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    /* Adjust height as needed */
+    max-height: 200px; /* Example height */
+  }
+}
