@@ -6,14 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chess Game</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="chessSelection.css">
 </head>
 
 <body>
+    <!-- <button id="set-black">Select Black Set</button>
+    <button id="set-white">Select White Set</button>
+    
     <div id="container"><h1 id="players-turn" >White's Turn</h1>
     <div id="chessboard">
         
-    </div></div>
+    </div></div> -->
+    <div id="top-controls">
+        <button id="set-black">Select <span>Black</span> Set</button>
+        <div class="set-black-options">
+            <div id="./black/images/" class="chess-set-black">Black Set 1</div>
+            <div id="./black/images1/" class="chess-set-black">Black Set 2</div>
+            <div id="./black/images2/" class="chess-set-black"><img src="./black/images1/Bknight.png" class="option-img"/>Black Set 3</div>
+            <div id="./black/images3/" class="chess-set-black">Black Set 4</div>
+        </div>
+    </div>
     
+    <div id="container">
+        <h1 id="players-turn">White's Turn</h1>
+        <button id="reset">Reset</button>
+        <div id="chessboard">
+        </div>
+    </div>
+    
+    <div id="bottom-controls">
+        <button id="set-white">Select <span>White</span> Set</button>
+        <div class="set-white-options">
+            <div id="./white/images/" class="chess-set-white">White Set 1</div>
+            <div id="./white/images1/" class="chess-set-white">White Set 2</div>
+            <div id="./white/images2/" class="chess-set-white">White Set 3</div>
+            <div id="./white/images3/" class="chess-set-white">White Set 4</div>
+        </div>
+    </div>
     
 
     <script src="highlightSquares/highlightKingSquares.js"></script>

@@ -8,24 +8,86 @@ let originalSquareBgColors = {};
 let currentPlayer = "W";
 let playersTurnTitle;
 
+let gameStarted = false;
+
+let chosenWhiteChessSet = "white/images/";
+let chosenBlackChessSet = "black/images/";
+
 document.addEventListener("DOMContentLoaded", function () {
   let chessBoard = document.getElementById("chessboard");
+  let setWhiteOptions = document.getElementsByClassName("set-white-options")[0];
+  let setBlackOptions = document.getElementsByClassName("set-black-options")[0];
+
+  document.getElementById("reset").addEventListener("click", () => {
+    chessBoard.innerHTML = "";
+    chosenWhiteChessSet = "white/images/";
+    chosenBlackChessSet = "black/images/";
+
+    currentPlayer = "W";
+    playersTurnTitle.style.backgroundColor = "White";
+    playersTurnTitle.style.color = "Black";
+    playersTurnTitle.textContent = "White's Turn";
+
+    let whiteButton = document.getElementById("set-white");
+    let blackButton = document.getElementById("set-black");
+    // Remove the "hide" class and enable the buttons
+    whiteButton.classList.remove("hide");
+    blackButton.classList.remove("hide");
+    whiteButton.disabled = false;
+    blackButton.disabled = false;
+
+    gameStarted = false;
+    generateNewChessBoard(chessBoard);
+  });
+
+  document.getElementById("set-white").addEventListener("click", () => {
+    setWhiteOptions.classList.toggle("show");
+  });
+
+  document.getElementById("set-black").addEventListener("click", () => {
+    setBlackOptions.classList.toggle("show");
+  });
+
+  // Event listener to hide options when clicking outside of them
+  document.addEventListener("click", function (event) {
+    if (
+      !event.target.matches("#set-white") &&
+      !event.target.matches("#set-black")
+    ) {
+      setWhiteOptions.classList.remove("show");
+      setBlackOptions.classList.remove("show");
+    }
+  });
+
+  // Event listeners for option clicks
+  document.querySelectorAll(".chess-set-white").forEach((option) => {
+    option.addEventListener("click", function () {
+      chosenWhiteChessSet = this.id;
+
+      // Close the options list
+      setWhiteOptions.classList.remove("show");
+      setBlackOptions.classList.remove("show");
+      chessBoard.innerHTML = "";
+      generateNewChessBoard(chessBoard);
+    });
+  });
+
+  document.querySelectorAll(".chess-set-black").forEach((option) => {
+    option.addEventListener("click", function () {
+      chosenBlackChessSet = this.id;
+
+      // Close the options list
+      setWhiteOptions.classList.remove("show");
+      setBlackOptions.classList.remove("show");
+
+      chessBoard.innerHTML = "";
+      generateNewChessBoard(chessBoard);
+    });
+  });
+
+  // document.getElementById("set-black");
   playersTurnTitle = document.getElementById("players-turn");
   playersTurnTitle.style.backgroundColor = "White";
-  // Function to create and append an image to a square
-  function addImageToSquare(square, imageName) {
-    let img = document.createElement("img");
-    img.src = "/images/" + imageName; // Path to the image
-    //img.draggable = true; // Enable dragging
-    // img.addEventListener("click", function (event) {
-    // });
-    // img.addEventdivstener("dragstart", function (event) {
-    //   console.log("Image being dragged");
-    //   event.dataTransfer.setData("text/plain", imageName);
-    //   event.dataTransfer.setDragImage("./images/" + imageName, 25, 35);
-    // });
-    square.appendChild(img);
-  }
 
   let evenColour = "#ebecd0";
   let oddColour = "#739552";
@@ -323,6 +385,20 @@ moveToEmptySquare = (swappingFrom, swappingTo) => {
   const pieceClassName = swappingFrom.classList[3];
 
   if (isValidMove(pieceClassName, swappingFrom, swappingTo)) {
+    if (!gameStarted) {
+      document.getElementById("set-black").classList.add("hide");
+      document.getElementById("set-white").classList.add("hide");
+
+      document.getElementById("set-black").disabled = true;
+      document.getElementById("set-white").disabled = true;
+
+      let setWhiteOptions =
+        document.getElementsByClassName("set-white-options")[0];
+      setWhiteOptions.classList.remove("show");
+      let setBlackOptions =
+        document.getElementsByClassName("set-black-options")[0];
+      setBlackOptions.classList.remove("show");
+    }
     console.log(
       "SWAPPING EMPTY SPACE SQAURES ----------------------------------"
     );
@@ -343,10 +419,11 @@ moveToEmptySquare = (swappingFrom, swappingTo) => {
     playersTurnTitle.style.color = currentPlayer === "W" ? "Black" : "White";
     playersTurnTitle.textContent =
       currentPlayer === "W" ? "White's Turn" : "Black's Turn";
+    gameStarted = true;
   } else {
     console.log("Invalid move for this piece!");
   }
-
+  console.log("Game started? " + gameStarted);
   console.log("AFTER SWAP");
   console.log("From: " + swappingFrom.classList);
   console.log("To: " + swappingTo.classList);
@@ -387,6 +464,20 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
   // console.log("To: " + swappingTo.classList);
   if (swappingFrom.classList[3][0] !== swappingTo.classList[3][0]) {
     if (isValidMove(pieceClassName, swappingFrom, swappingTo)) {
+      if (!gameStarted) {
+        document.getElementById("set-black").disabled = true;
+        document.getElementById("set-white").disabled = true;
+
+        document.getElementById("set-black").disabled = true;
+        document.getElementById("set-white").disabled = true;
+
+        let setWhiteOptions =
+          document.getElementsByClassName("set-white-options")[0];
+        setWhiteOptions.classList.remove("show");
+        let setBlackOptions =
+          document.getElementsByClassName("set-black-options")[0];
+        setBlackOptions.classList.remove("show");
+      }
       /* 
       Check for the first character, it indicates the colour
       W = White
@@ -437,12 +528,6 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
         console.log("From: " + swappingFrom.classList);
         console.log("To: " + swappingTo.classList);
 
-        console.log(
-          "Swapping classList -> -> -> From: " +
-            swappingFrom.classList[3][0] +
-            " -> -> To: " +
-            swappingTo.classList[3][0]
-        );
         currentPlayer = currentPlayer === "W" ? "B" : "W";
         playersTurnTitle.style.backgroundColor =
           currentPlayer === "W" ? "White" : "Black";
@@ -451,11 +536,14 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
         playersTurnTitle.textContent =
           currentPlayer === "W" ? "White's Turn" : "Black's Turn";
         //playersTurnTitle.style.color = currentPlayer === "W" ? "Red" : "Green";
+
+        gameStarted = true;
       }
     }
   } else {
     console.log("Invalid movement.");
   }
+  console.log("Game started? " + gameStarted);
 
   tempSquare.classList.remove("highlight");
   tempSquare = null;
@@ -513,4 +601,302 @@ function resetHighlightedSquares() {
     square.classList.remove("attack");
     square.style.backgroundColor = originalSquareBgColors[square.id];
   });
+}
+
+function generateNewChessBoard(chessBoard) {
+  let columnNumber = 1;
+
+  //Start at one because once rowCounter hits 8 on the last square,
+  // columnCounter will not increment again.
+  //This is for an 8x8 grid.
+  let rowNumber = 1;
+
+  let isEven = false;
+  for (let i = 1; i < 65; i++) {
+    //Reset the row counter. 8th square was created.
+    //Column created, increment column counter.
+    if (columnNumber === 9) {
+      columnNumber = 1;
+      rowNumber++;
+    }
+    let div = document.createElement("div");
+
+    div.addEventListener("click", function () {
+      if (tempSquare !== div) {
+        if (!tempSquare && div.classList[3][0] === currentPlayer) {
+          giveHints(div);
+        }
+        if (div.children.length > 0) {
+          // Revert the background color of the previously clicked square
+          if (tempSquare) {
+            tempSquare.style.backgroundColor =
+              originalSquareBgColors[tempSquare.classList[0]];
+
+            if (
+              tempSquare.children.length > 0 &&
+              tempSquare.classList[3][0] === currentPlayer &&
+              tempSquare.classList[3][0] !== div.classList[3][0]
+            ) {
+              moveToFilledSquare(tempSquare, div);
+              tempSquare = null;
+            }
+          } else {
+            if (div.classList[3][0] === currentPlayer) {
+              // highlight the clicked square
+              tempSquare = div;
+              // tempSquare.style.backgroundColor = "#ffff33";
+              tempSquare.classList.add("highlight");
+            }
+          }
+        } else {
+          //Square picked has an image as a child
+          if (
+            tempSquare &&
+            tempSquare.children.length > 0 &&
+            tempSquare.classList[3][0] === currentPlayer
+          ) {
+            moveToEmptySquare(tempSquare, div);
+          }
+        }
+      } else {
+        tempSquare.classList.remove("highlight");
+        tempSquare = null;
+        resetHighlightedSquares();
+      }
+    });
+
+    // Match the 8th square from the previous row
+    if ((i - 1) % 8 === 0) isEven = !isEven;
+    div.id = `${columnNumber % 10}${rowNumber}`;
+
+    //[0] = (Column : Row) - What tile it is.
+    //Example: 31 = Column 3 : Row 1
+    div.classList.add(`${columnNumber % 10}${rowNumber}`);
+    //[1] = background colour for css
+    div.classList.add(`${isEven ? "even" : "odd"}`);
+    div.classList.add("square");
+    isEven = !isEven;
+    originalSquareBgColors[div.id] = div.style.backgroundColor;
+
+    //Black pieces row 1
+    if (i === 64 && rowNumber === 8) {
+      // placeholder
+      addImageToSquare(div, "Wrook.png");
+      div.classList.add("Wrook");
+    }
+    if (i === 63 && rowNumber === 8) {
+      // placeholder
+      addImageToSquare(div, "Wknight.png");
+      div.classList.add("Wknight");
+    }
+    if (i === 62 && rowNumber === 8) {
+      // placeholder
+      addImageToSquare(div, "Wbishop.png");
+      div.classList.add("Wbishop");
+    }
+    if (i === 61 && rowNumber === 8) {
+      // placeholder
+      addImageToSquare(div, "Wqueen.png");
+      div.classList.add("Wqueen");
+    }
+    if (i === 60 && rowNumber === 8) {
+      // placeholder
+      addImageToSquare(div, "Wking.png");
+      div.classList.add("Wking");
+    }
+    if (i === 59 && rowNumber === 8) {
+      // placeholder
+      addImageToSquare(div, "Wbishop.png");
+      div.classList.add("Wbishop");
+    }
+    if (i === 58 && rowNumber === 8) {
+      // placeholder
+      addImageToSquare(div, "Wknight.png");
+      div.classList.add("Wknight");
+    }
+    if (i === 57 && rowNumber === 8) {
+      // placeholder
+      addImageToSquare(div, "Wrook.png");
+      div.classList.add("Wrook");
+    }
+    // Black pieces row 2
+    if (i === 49 && rowNumber === 7) {
+      // placeholder
+      addImageToSquare(div, "Wpawn.png");
+      div.classList.add("Wpawn");
+      // Add for starting move with pawn
+      div.classList.add("start");
+    }
+    if (i === 50 && rowNumber === 7) {
+      // placeholder
+      addImageToSquare(div, "Wpawn.png");
+      div.classList.add("Wpawn");
+      // Add for starting move with pawn
+      div.classList.add("start");
+    }
+    if (i === 51 && rowNumber === 7) {
+      // placeholder
+      addImageToSquare(div, "Wpawn.png");
+      div.classList.add("Wpawn");
+      // Add for starting move with pawn
+      div.classList.add("start");
+    }
+    if (i === 52 && rowNumber === 7) {
+      // placeholder
+      addImageToSquare(div, "Wpawn.png");
+      div.classList.add("Wpawn");
+      // Add for starting move with pawn
+      div.classList.add("start");
+    }
+    if (i === 53 && rowNumber === 7) {
+      // placeholder
+      addImageToSquare(div, "Wpawn.png");
+      div.classList.add("Wpawn");
+      // Add for starting move with pawn
+      div.classList.add("start");
+    }
+    if (i === 54 && rowNumber === 7) {
+      // placeholder
+      addImageToSquare(div, "Wpawn.png");
+      div.classList.add("Wpawn");
+      // Add for starting move with pawn
+      div.classList.add("start");
+    }
+    if (i === 55 && rowNumber === 7) {
+      // placeholder
+      addImageToSquare(div, "Wpawn.png");
+      div.classList.add("Wpawn");
+      // Add for starting move with pawn
+      div.classList.add("start");
+    }
+    if (i === 56 && rowNumber === 7) {
+      // placeholder
+      addImageToSquare(div, "Wpawn.png");
+      div.classList.add("Wpawn");
+      // Add for starting move with pawn
+      div.classList.add("start");
+    }
+
+    // White pieces row 7
+
+    if (i === 1 && rowNumber === 1) {
+      // placeholder
+      addImageToSquare(div, "Brook.png");
+      div.classList.add("Brook");
+    }
+    if (i === 2 && rowNumber === 1) {
+      // placeholder
+      addImageToSquare(div, "Bknight.png");
+      div.classList.add("Bknight");
+    }
+    if (i === 3 && rowNumber === 1) {
+      // placeholder
+      addImageToSquare(div, "Bbishop.png");
+      div.classList.add("Bbishop");
+    }
+    if (i === 4 && rowNumber === 1) {
+      // placeholder
+      addImageToSquare(div, "Bqueen.png");
+      div.classList.add("Bqueen");
+    }
+    if (i === 5 && rowNumber === 1) {
+      // placeholder
+      addImageToSquare(div, "Bking.png");
+      div.classList.add("Bking");
+    }
+    if (i === 6 && rowNumber === 1) {
+      // placeholder
+      addImageToSquare(div, "Bbishop.png");
+      div.classList.add("Bbishop");
+    }
+    if (i === 7 && rowNumber === 1) {
+      // rowNumber
+      addImageToSquare(div, "Bknight.png");
+      div.classList.add("Bknight");
+    }
+    if (i === 8 && rowNumber === 1) {
+      // placeholder
+      addImageToSquare(div, "Brook.png");
+      div.classList.add("Brook");
+    }
+
+    // White pieces row 8
+    if (i === 16 && rowNumber === 2) {
+      // placeholder
+      addImageToSquare(div, "Bpawn.png");
+      div.classList.add("Bpawn");
+      // Add for starting move with pawn
+      div.classList.add("start");
+    }
+    if (i === 15 && rowNumber === 2) {
+      // placeholder
+      addImageToSquare(div, "Bpawn.png");
+      div.classList.add("Bpawn");
+      // Add for starting move with pawn
+      div.classList.add("start");
+    }
+    if (i === 14 && rowNumber === 2) {
+      // placeholder
+      addImageToSquare(div, "Bpawn.png");
+      div.classList.add("Bpawn");
+      // Add for starting move with pawn
+      div.classList.add("start");
+    }
+    if (i === 13 && rowNumber === 2) {
+      // placeholder
+      addImageToSquare(div, "Bpawn.png");
+      div.classList.add("Bpawn");
+      // Add for starting move with pawn
+      div.classList.add("start");
+    }
+    if (i === 12 && rowNumber === 2) {
+      // placeholder
+      addImageToSquare(div, "Bpawn.png");
+      div.classList.add("Bpawn");
+      // Add for starting move with pawn
+      div.classList.add("start");
+    }
+    if (i === 11 && rowNumber === 2) {
+      // placeholder
+      addImageToSquare(div, "Bpawn.png");
+      div.classList.add("Bpawn");
+      // Add for starting move with pawn
+      div.classList.add("start");
+    }
+    if (i === 10 && rowNumber === 2) {
+      // placeholder
+      addImageToSquare(div, "Bpawn.png");
+      div.classList.add("Bpawn");
+      // Add for starting move with pawn
+      div.classList.add("start");
+    }
+    if (i === 9 && rowNumber === 2) {
+      // placeholder
+      addImageToSquare(div, "Bpawn.png");
+      div.classList.add("Bpawn");
+      // Add for starting move with pawn
+      div.classList.add("start");
+    }
+
+    chessBoard.appendChild(div);
+    columnNumber++;
+  }
+}
+
+// Function to create and append an image to a square
+function addImageToSquare(square, imageName) {
+  let img = document.createElement("img");
+  img.src =
+    imageName[0] === "W"
+      ? chosenWhiteChessSet + imageName
+      : chosenBlackChessSet + imageName; // Path to the image
+  //img.draggable = true; // Enable dragging
+  // img.addEventListener("click", function (event) {
+  // });
+  // img.addEventdivstener("dragstart", function (event) {
+  //   console.log("Image being dragged");
+  //   event.dataTransfer.setData("text/plain", imageName);
+  //   event.dataTransfer.setDragImage("./images/" + imageName, 25, 35);
+  // });
+  square.appendChild(img);
 }
