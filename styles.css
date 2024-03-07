@@ -25,6 +25,19 @@ body {
 }
 
 #container {
+  display: flex;
+  flex-direction: column;
+}
+#container h1 {
+  text-align: center;
+  margin: 10px auto;
+  padding: 5px;
+  width: 20vw;
+
+  border-radius: 5px;
+}
+
+#chessboard {
   /* display: grid;
   place-items: center;
   justify-content: center;
@@ -42,29 +55,42 @@ body {
 }
 
 @media screen and (max-width: 850px) {
-  #container {
+  #chessboard {
     grid-template-columns: repeat(8, [col] 6.5vw);
     grid-template-rows: repeat(8, [row] 6.5vw);
+  }
+
+  #players-turn {
+    font-size: 20px;
   }
 }
 
 @media screen and (max-width: 650px) {
-  #container {
+  #chessboard {
     grid-template-columns: repeat(8, [col] 8vw);
     grid-template-rows: repeat(8, [row] 8vw);
+  }
+  #players-turn {
+    font-size: 16px;
   }
 }
 
 @media screen and (max-width: 450px) {
-  #container {
+  #chessboard {
     grid-template-columns: repeat(8, [col] 9vw);
     grid-template-rows: repeat(8, [row] 9vw);
   }
+  #players-turn {
+    font-size: 14px;
+  }
 }
 @media screen and (max-width: 400px) {
-  #container {
+  #chessboard {
     grid-template-columns: repeat(8, [col] 10vw);
     grid-template-rows: repeat(8, [row] 10vw);
+  }
+  #players-turn {
+    font-size: 12px;
   }
 }
 #tog {
@@ -91,7 +117,7 @@ body {
   color: #000; /* Change color to match the opposite of square color */
 }
 
-.square #container div {
+.square #chessboard div {
   border: none;
   margin: 0;
   padding: 0;
@@ -109,7 +135,7 @@ body {
   background-color: #ffff33;
 }
 
-#container div img {
+#chessboard div img {
   height: 100%;
   width: 100%;
 }

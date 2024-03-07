@@ -6,10 +6,12 @@ let tempSquareBgColour = "";
 let originalSquareBgColors = {};
 
 let currentPlayer = "W";
+let playersTurnTitle;
 
 document.addEventListener("DOMContentLoaded", function () {
-  let chestPiecesdivst = document.getElementById("chest-pieces");
-  let chessBoard = document.getElementById("container");
+  let chessBoard = document.getElementById("chessboard");
+  playersTurnTitle = document.getElementById("players-turn");
+  playersTurnTitle.style.backgroundColor = "White";
   // Function to create and append an image to a square
   function addImageToSquare(square, imageName) {
     let img = document.createElement("img");
@@ -336,6 +338,11 @@ moveToEmptySquare = (swappingFrom, swappingTo) => {
     swappingFrom.classList.remove(swappingFrom.classList[3]);
 
     currentPlayer = currentPlayer === "W" ? "B" : "W";
+    playersTurnTitle.style.backgroundColor =
+      currentPlayer === "W" ? "White" : "Black";
+    playersTurnTitle.style.color = currentPlayer === "W" ? "Black" : "White";
+    playersTurnTitle.textContent =
+      currentPlayer === "W" ? "White's Turn" : "Black's Turn";
   } else {
     console.log("Invalid move for this piece!");
   }
@@ -437,6 +444,13 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
             swappingTo.classList[3][0]
         );
         currentPlayer = currentPlayer === "W" ? "B" : "W";
+        playersTurnTitle.style.backgroundColor =
+          currentPlayer === "W" ? "White" : "Black";
+        playersTurnTitle.style.color =
+          currentPlayer === "W" ? "Black" : "White";
+        playersTurnTitle.textContent =
+          currentPlayer === "W" ? "Whiteeeee" : "Blackeeeee";
+        //playersTurnTitle.style.color = currentPlayer === "W" ? "Red" : "Green";
       }
     }
   } else {
