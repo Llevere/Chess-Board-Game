@@ -10,13 +10,16 @@
 </head>
 
 <body>
-    <!-- <button id="set-black">Select Black Set</button>
-    <button id="set-white">Select White Set</button>
-    
-    <div id="container"><h1 id="players-turn" >White's Turn</h1>
-    <div id="chessboard">
-        
-    </div></div> -->
+    <audio id="moveSound">
+        <source src="https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/move-self.mp3" type="audio/mpeg">
+        <!-- Add additional <source> elements for other audio formats
+        Your browser does not support the audio element. -->
+    </audio>
+    <audio id="takeSound">
+        <source src="https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/capture.mp3" type="audio/mpeg">
+        <!-- Add additional <source> elements for other audio formats
+        Your browser does not support the audio element. -->
+    </audio>
     <div id="top-controls">
         <button id="set-black">Select <span>Black</span> Set</button>
         <div class="set-black-options">

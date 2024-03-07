@@ -420,6 +420,7 @@ moveToEmptySquare = (swappingFrom, swappingTo) => {
     playersTurnTitle.textContent =
       currentPlayer === "W" ? "White's Turn" : "Black's Turn";
     gameStarted = true;
+    playMoveSound();
   } else {
     console.log("Invalid move for this piece!");
   }
@@ -538,6 +539,8 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
         //playersTurnTitle.style.color = currentPlayer === "W" ? "Red" : "Green";
 
         gameStarted = true;
+
+        playTakeSound();
       }
     }
   } else {
@@ -576,14 +579,6 @@ function isValidMove(pieceClassName, fromSquare, toSquare) {
       return false; // A chess piece was not found
   }
 }
-
-const isThirdIndexChessPiece = (chessPiece) => {
-  // Return if the 3rd index starts with W or B (indicating it's black or white).
-  // If returns false, it means the 3rd index in the class name is not a chess piece.
-  return (
-    chessPiece.classList[3][0] === "W" || chessPiece.classList[3][0] === "B"
-  );
-};
 
 function tileLocator(square) {
   // Assuming class name format is "XY" where X is the column and Y is the row
@@ -899,4 +894,14 @@ function addImageToSquare(square, imageName) {
   //   event.dataTransfer.setDragImage("./images/" + imageName, 25, 35);
   // });
   square.appendChild(img);
+}
+
+function playMoveSound() {
+  var moveSound = document.getElementById("moveSound");
+  moveSound.play();
+}
+
+function playTakeSound() {
+  var takeSound = document.getElementById("takeSound");
+  takeSound.play();
 }
