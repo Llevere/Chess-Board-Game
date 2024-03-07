@@ -54,7 +54,7 @@ body {
   margin: 0 auto;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 910px) {
   #chessboard {
     grid-template-columns: repeat(8, [col] 6.5vw);
     grid-template-rows: repeat(8, [row] 6.5vw);
@@ -75,7 +75,7 @@ body {
   }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 465px) {
   #chessboard {
     grid-template-columns: repeat(8, [col] 9vw);
     grid-template-rows: repeat(8, [row] 9vw);
