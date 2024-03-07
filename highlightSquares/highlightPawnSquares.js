@@ -5,20 +5,6 @@ function highlightPawnSquares(position) {
   if (position.classList.contains("start")) {
     if (fromColour === "W") {
       if (
-        fromTileLocation.row - 2 >= 1 &&
-        !(
-          document.getElementById(
-            `${fromTileLocation.column}${fromTileLocation.row - 2}`
-          ).children.length > 0
-        )
-      ) {
-        document
-          .getElementById(
-            `${fromTileLocation.column}${fromTileLocation.row - 2}`
-          )
-          .classList.add("hint");
-      }
-      if (
         fromTileLocation.row - 1 >= 1 &&
         !(
           document.getElementById(
@@ -31,22 +17,23 @@ function highlightPawnSquares(position) {
             `${fromTileLocation.column}${fromTileLocation.row - 1}`
           )
           .classList.add("hint");
+
+        if (
+          fromTileLocation.row - 2 >= 1 &&
+          !(
+            document.getElementById(
+              `${fromTileLocation.column}${fromTileLocation.row - 2}`
+            ).children.length > 0
+          )
+        ) {
+          document
+            .getElementById(
+              `${fromTileLocation.column}${fromTileLocation.row - 2}`
+            )
+            .classList.add("hint");
+        }
       }
     } else if (fromColour === "B") {
-      if (
-        fromTileLocation.row + 2 <= 8 &&
-        !(
-          document.getElementById(
-            `${fromTileLocation.column}${fromTileLocation.row + 2}`
-          ).children.length > 0
-        )
-      ) {
-        document
-          .getElementById(
-            `${fromTileLocation.column}${fromTileLocation.row + 2}`
-          )
-          .classList.add("hint");
-      }
       if (
         fromTileLocation.row + 1 <= 8 &&
         !(
@@ -60,6 +47,21 @@ function highlightPawnSquares(position) {
             `${fromTileLocation.column}${fromTileLocation.row + 1}`
           )
           .classList.add("hint");
+
+        if (
+          fromTileLocation.row + 2 <= 8 &&
+          !(
+            document.getElementById(
+              `${fromTileLocation.column}${fromTileLocation.row + 2}`
+            ).children.length > 0
+          )
+        ) {
+          document
+            .getElementById(
+              `${fromTileLocation.column}${fromTileLocation.row + 2}`
+            )
+            .classList.add("hint");
+        }
       }
     }
   }
