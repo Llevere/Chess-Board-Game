@@ -12,9 +12,9 @@ let gameStarted = false;
 
 let chosenWhiteChessSet = "white/images/";
 let chosenBlackChessSet = "black/images/";
-
+let chessBoard;
 document.addEventListener("DOMContentLoaded", function () {
-  let chessBoard = document.getElementById("chessboard");
+  chessBoard = document.getElementById("chessboard");
   let setWhiteOptions = document.getElementsByClassName("set-white-options")[0];
   let setBlackOptions = document.getElementsByClassName("set-black-options")[0];
 
@@ -379,12 +379,13 @@ document.addEventListener("DOMContentLoaded", function () {
 //   swappingFrom.classList.remove("highlight");
 // };
 moveToEmptySquare = (swappingFrom, swappingTo) => {
-  console.log("BEFORE SWAP");
-  console.log("From: " + swappingFrom.classList);
-  console.log("To: " + swappingTo.classList);
+  // console.log("BEFORE SWAP");
+  // console.log("From: " + swappingFrom.classList);
+  // console.log("To: " + swappingTo.classList);
   const pieceClassName = swappingFrom.classList[3];
 
   if (isValidMove(pieceClassName, swappingFrom, swappingTo)) {
+    isKingBeingTaken(swappingFrom);
     if (!gameStarted) {
       document.getElementById("set-black").classList.add("hide");
       document.getElementById("set-white").classList.add("hide");
@@ -399,9 +400,9 @@ moveToEmptySquare = (swappingFrom, swappingTo) => {
         document.getElementsByClassName("set-black-options")[0];
       setBlackOptions.classList.remove("show");
     }
-    console.log(
-      "SWAPPING EMPTY SPACE SQAURES ----------------------------------"
-    );
+    // console.log(
+    //   "SWAPPING EMPTY SPACE SQAURES ----------------------------------"
+    // );
     let img = swappingFrom.querySelector("img");
     swappingFrom.removeChild(img);
     swappingTo.appendChild(img);
@@ -420,18 +421,21 @@ moveToEmptySquare = (swappingFrom, swappingTo) => {
     playersTurnTitle.textContent =
       currentPlayer === "W" ? "White's Turn" : "Black's Turn";
     gameStarted = true;
+
+    //isKingBeingTaken(swappingTo);
     playMoveSound();
   } else {
-    console.log("Invalid move for this piece!");
+    // console.log("Invalid move for this piece!");
   }
-  console.log("Game started? " + gameStarted);
-  console.log("AFTER SWAP");
-  console.log("From: " + swappingFrom.classList);
-  console.log("To: " + swappingTo.classList);
+  // console.log("Game started? " + gameStarted);
+  // console.log("AFTER SWAP");
+  // console.log("From: " + swappingFrom.classList);
+  // console.log("To: " + swappingTo.classList);
   swappingFrom.classList.remove("highlight");
   swappingTo.classList.remove("highlight");
   tempSquare.classList.remove("highlight");
   tempSquare = null;
+
   resetHighlightedSquares();
 };
 
@@ -485,7 +489,7 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
       B = Black 
       */
 
-      console.log("Swapping different colours.");
+      //  console.log("Swapping different colours.");
       if (swappingFromImg && swappingToImg) {
         // Check if both squares have images
         swappingFrom.removeChild(swappingFromImg);
@@ -511,23 +515,35 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
         // if (swappingFrom.classList.contains("start")) {
         //   // Chess piece is a pawn and has not moved from its initial position.
         // }
-        console.log(
-          "SWAPPING TWO FILLED SQAURES ----------------------------------"
-        );
-        console.log("BEFORE SWAP");
-        console.log("From: " + swappingFrom.classList);
-        console.log("To: " + swappingTo.classList);
+        // console.log(
+        //   "SWAPPING TWO FILLED SQAURES ----------------------------------"
+        // );
+        // console.log("BEFORE SWAP");
+        // console.log("From: " + swappingFrom.classList);
+        // console.log("To: " + swappingTo.classList);
 
-        console.log("Removing the class name start.");
+        // console.log("Removing the class name start.");
         swappingFrom.classList.remove("start");
         swappingTo.classList.remove("start");
+
+        if (
+          swappingTo.classList.contains("Wking") ||
+          swappingTo.classList.contains("Bking")
+        ) {
+          // If the taken piece is a King, show the modal
+          $("#kingTakenModal").modal("show");
+          chessBoard.innerHTML = "";
+          // chosenWhiteChessSet = "white/images/";
+          // chosenBlackChessSet = "black/images/";
+          generateNewChessBoard(chessBoard);
+        }
 
         swappingTo.classList.remove(swappingTo.classList[3]);
         swappingTo.classList.add(swappingFrom.classList[3]);
         swappingFrom.classList.remove(swappingFrom.classList[3]);
-        console.log("AFTER SWAP");
-        console.log("From: " + swappingFrom.classList);
-        console.log("To: " + swappingTo.classList);
+        // console.log("AFTER SWAP");
+        // console.log("From: " + swappingFrom.classList);
+        // console.log("To: " + swappingTo.classList);
 
         currentPlayer = currentPlayer === "W" ? "B" : "W";
         playersTurnTitle.style.backgroundColor =
@@ -539,14 +555,16 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
         //playersTurnTitle.style.color = currentPlayer === "W" ? "Red" : "Green";
 
         gameStarted = true;
-
+        // console.log("Squares swapped.");
+        isKingBeingTaken(swappingTo);
+        // console.log("SWAPPING TO: " + swappingTo);
         playTakeSound();
       }
     }
   } else {
-    console.log("Invalid movement.");
+    // console.log("Invalid movement.");
   }
-  console.log("Game started? " + gameStarted);
+  //  console.log("Game started? " + gameStarted);
 
   tempSquare.classList.remove("highlight");
   tempSquare = null;
@@ -557,7 +575,7 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
 };
 
 function isValidMove(pieceClassName, fromSquare, toSquare) {
-  console.log("Piece classList: " + pieceClassName);
+  // console.log("Piece classList: " + pieceClassName);
   // Implement rules for each chess piece
   switch (pieceClassName.substring(1)) {
     case "rook":
@@ -575,16 +593,17 @@ function isValidMove(pieceClassName, fromSquare, toSquare) {
       return isValidQueenMove(fromSquare, toSquare);
 
     default:
-      console.log("None of the cases were met in 'isValidMove'");
+      //  console.log("None of the cases were met in 'isValidMove'");
       return false; // A chess piece was not found
   }
 }
 
 function tileLocator(square) {
   // Assuming class name format is "XY" where X is the column and Y is the row
-  const className = square.classList[0];
-  const column = parseInt(className[0]);
-  const row = parseInt(className[1]);
+  const id = square.id;
+  // console.log("Id:" + id, square);
+  const column = parseInt(id[0]);
+  const row = parseInt(id[1]);
 
   return { column, row };
 }
