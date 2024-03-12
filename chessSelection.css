@@ -5,6 +5,10 @@
   margin: 2.5vw;
 }
 
+#black-controls,
+#white-controls {
+  display: none;
+}
 #set-white,
 #set-black {
   background-color: #3498db;
@@ -86,13 +90,26 @@
 }
 
 @media screen and (max-width: 650px) {
-  #bottom-controls,
-  #top-controls {
+  #top-controls,
+  #bottom-controls {
+    display: none;
+  }
+  #chessSet-controls {
     position: relative;
     display: flex; /* Change display to flex */
     flex-direction: row; /* Stack child elements vertically */
     align-items: center; /* Center child elements horizontally */
     margin: 2.5vw;
+  }
+
+  #white-controls,
+  #black-controls {
+    display: inline-block;
+    margin-top: 5%;
+  }
+
+  #white-controls {
+    margin-left: auto;
   }
 
   /* Adjust the height of the child options */

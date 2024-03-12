@@ -35,6 +35,36 @@
         <button id="reset">Reset</button>
         <div id="chessboard">
         </div>
+        <div id="chessSet-controls">
+            <div id="black-controls">
+                <button id="set-black">Select <span>Black</span> Set</button>
+                <div class="set-black-options">
+                    <div id="./black/images/" class="chess-set-black"><img src="./black/images/Bknight.png"
+                            class="option-img" />Black Set 1</div>
+                    <div id="./black/images1/" class="chess-set-black"><img src="./black/images1/Bknight.png"
+                            class="option-img" />Black Set 2</div>
+                    <div id="./black/images2/" class="chess-set-black"><img src="./black/images2/Bknight.png"
+                            class="option-img" />Black Set 3</div>
+                    <div id="./black/images3/" class="chess-set-black"><img src="./black/images3/Bknight.png"
+                            class="option-img" />Black Set 4</div>
+                </div>
+            </div>
+            
+            <div id="white-controls">
+                <button id="set-white">Select <span>White</span> Set</button>
+                <div class="set-white-options">
+                    <div id="./white/images/" class="chess-set-white"><img src="./white/images/Wknight.png"
+                            class="option-img" />White Set 1</div>
+                    <div id="./white/images1/" class="chess-set-white"><img src="./white/images1/Wknight.png"
+                            class="option-img" />White Set 2</div>
+                    <div id="./white/images2/" class="chess-set-white"><img src="./white/images2/Wknight.png"
+                            class="option-img" />White Set 3</div>
+                    <div id="./white/images3/" class="chess-set-white"><img src="./white/images3/Wknight.png"
+                            class="option-img" />White Set 4</div>
+                </div>
+            </div>
+        </div>
+    
     </div>
     <div class="modal" id="kingTakenModal">
         <div class="modal-dialog">
@@ -53,9 +83,7 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     
     <div id="bottom-controls">
         <button id="set-white">Select <span>White</span> Set</button>
@@ -67,6 +95,9 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="isKingInCheck/isBishopTakingKing.js"></script>
     <script src="isKingInCheck/IsKingBeingTaken.js"></script>
     <script src="isKingInCheck/isKnightTakingKing.js"></script>
