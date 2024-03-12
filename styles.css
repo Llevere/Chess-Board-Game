@@ -45,8 +45,8 @@ body {
   margin: 0 auto; */
   display: grid;
   grid-gap: 0;
-  grid-template-columns: repeat(8, [col] clamp(3vw, 5.5vw, 6vw));
-  grid-template-rows: repeat(8, [row] 5.5vw);
+  grid-template-columns: repeat(8, [col] clamp(3vw, 4.5vw, 4.5vw));
+  grid-template-rows: repeat(8, [row] 4.5vw);
   border: 10px solid #b58863;
   box-shadow: 0 5px 8px #777;
   justify-content: center;
@@ -56,8 +56,8 @@ body {
 
 @media screen and (max-width: 910px) {
   #chessboard {
-    grid-template-columns: repeat(8, [col] 6.5vw);
-    grid-template-rows: repeat(8, [row] 6.5vw);
+    grid-template-columns: repeat(8, [col] 5.5vw);
+    grid-template-rows: repeat(8, [row] 5.5vw);
   }
 
   #players-turn {
@@ -67,8 +67,8 @@ body {
 
 @media screen and (max-width: 650px) {
   #chessboard {
-    grid-template-columns: repeat(8, [col] 8vw);
-    grid-template-rows: repeat(8, [row] 8vw);
+    grid-template-columns: repeat(8, [col] 7vw);
+    grid-template-rows: repeat(8, [row] 7vw);
   }
   #players-turn {
     font-size: 16px;
@@ -77,8 +77,8 @@ body {
 
 @media screen and (max-width: 465px) {
   #chessboard {
-    grid-template-columns: repeat(8, [col] 9vw);
-    grid-template-rows: repeat(8, [row] 9vw);
+    grid-template-columns: repeat(8, [col] 8vw);
+    grid-template-rows: repeat(8, [row] 8vw);
   }
   #players-turn {
     font-size: 14px;
@@ -86,8 +86,8 @@ body {
 }
 @media screen and (max-width: 400px) {
   #chessboard {
-    grid-template-columns: repeat(8, [col] 10vw);
-    grid-template-rows: repeat(8, [row] 10vw);
+    grid-template-columns: repeat(8, [col] 9vw);
+    grid-template-rows: repeat(8, [row] 9vw);
   }
   #players-turn {
     font-size: 12px;

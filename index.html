@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chess Game</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="stylesheet" type="text/css" href="chessSelection.css">
 </head>
@@ -12,13 +14,11 @@
 <body>
     <audio id="moveSound">
         <source src="https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/move-self.mp3" type="audio/mpeg">
-        <!-- Add additional <source> elements for other audio formats
-        Your browser does not support the audio element. -->
+   
     </audio>
     <audio id="takeSound">
         <source src="https://images.chesscomfiles.com/chess-themes/sounds/_MP3_/default/capture.mp3" type="audio/mpeg">
-        <!-- Add additional <source> elements for other audio formats
-        Your browser does not support the audio element. -->
+
     </audio>
     <div id="top-controls">
         <button id="set-black">Select <span>Black</span> Set</button>
@@ -36,6 +36,26 @@
         <div id="chessboard">
         </div>
     </div>
+    <div class="modal" id="kingTakenModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">King Taken!</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>The King has been taken. Game Over!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
     <div id="bottom-controls">
         <button id="set-white">Select <span>White</span> Set</button>
@@ -46,8 +66,13 @@
             <div id="./white/images3/" class="chess-set-white"><img src="./white/images3/Wknight.png" class="option-img" />White Set 4</div>
         </div>
     </div>
-    
 
+    <script src="isKingInCheck/isBishopTakingKing.js"></script>
+    <script src="isKingInCheck/IsKingBeingTaken.js"></script>
+    <script src="isKingInCheck/isKnightTakingKing.js"></script>
+    <script src="isKingInCheck/isPawnTakingKing.js"></script>
+    <script src="isKingInCheck/isQueenTakingKing.js"></script>
+    <script src="isKingInCheck/isRookTakingKing.js"></script>
     <script src="highlightSquares/highlightKingSquares.js"></script>
     <script src="highlightSquares/highlightQueenSquares.js"></script>
     <script src="highlightSquares/highlightBishopSquares.js"></script>
@@ -62,6 +87,8 @@
     <script src="validateMoves/validPawnMove.js"></script>
     
     <script src="script.js" ></script>
+
+    
 </body>
 
 </html>
