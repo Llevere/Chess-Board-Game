@@ -385,20 +385,24 @@ moveToEmptySquare = (swappingFrom, swappingTo) => {
   const pieceClassName = swappingFrom.classList[3];
 
   if (isValidMove(pieceClassName, swappingFrom, swappingTo)) {
-    isKingBeingTaken(swappingFrom);
+    //isKingBeingTaken(swappingFrom);
     if (!gameStarted) {
-      document.getElementById("set-black").classList.add("hide");
-      document.getElementById("set-white").classList.add("hide");
+      const blackControlsMobile = document.getElementById("black-controls");
+      const whiteControlsMobile = document.getElementById("white-controls");
 
-      document.getElementById("set-black").disabled = true;
-      document.getElementById("set-white").disabled = true;
+      // console.log("Black Mobile: " + blackControlsMobile);
+      // console.log("White Mobile: " + whiteControlsMobile);
 
-      let setWhiteOptions =
-        document.getElementsByClassName("set-white-options")[0];
-      setWhiteOptions.classList.remove("show");
-      let setBlackOptions =
-        document.getElementsByClassName("set-black-options")[0];
-      setBlackOptions.classList.remove("show");
+      const blackControlsDesktop = document.getElementById("top-controls");
+      const whiteControlsDesktop = document.getElementById("bottom-controls");
+
+      // console.log("Black Desktop: " + blackControlsDesktop);
+      // console.log("White Desktop: " + whiteControlsDesktop);
+
+      blackControlsDesktop.classList.add("hide");
+      whiteControlsDesktop.classList.add("hide");
+      blackControlsMobile.classList.add("hide");
+      whiteControlsMobile.classList.add("hide");
     }
     // console.log(
     //   "SWAPPING EMPTY SPACE SQAURES ----------------------------------"
