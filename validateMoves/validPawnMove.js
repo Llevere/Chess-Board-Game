@@ -46,7 +46,7 @@ function isValidPawnMove(fromSquare, toSquare) {
   )
     return false;
   if (fromTileLocation.row === toTileLocation.row) {
-    console.log("Pawn tring to move left or right, returning false");
+    //console.log("Pawn tring to move left or right, returning false");
     return false;
   }
   if (
@@ -55,7 +55,7 @@ function isValidPawnMove(fromSquare, toSquare) {
     (fromTileLocation.row - toTileLocation.row === 2 ||
       toTileLocation.row - fromTileLocation.row === 2)
   ) {
-    console.log("Trying to move two squares vertically without 'start");
+    // console.log("Trying to move two squares vertically without 'start");
     return false;
   }
 
@@ -76,9 +76,9 @@ function isValidPawnMove(fromSquare, toSquare) {
               `${toTileLocation.column}${toTileLocation.row}`
             ).children.length > 0
           ) {
-            console.log(
-              "A chess piece is within the white pawns route. Invalid move for going straight"
-            );
+            // console.log(
+            //   "A chess piece is within the white pawns route. Invalid move for going straight"
+            // );
             return false;
           }
 
@@ -94,37 +94,37 @@ function isValidPawnMove(fromSquare, toSquare) {
               `${toTileLocation.column}${toTileLocation.row}`
             ).children.length > 0
           ) {
-            console.log(
-              "A chess piece is within the black pawns route. Invalid move for going straight"
-            );
+            // console.log(
+            //   "A chess piece is within the black pawns route. Invalid move for going straight"
+            // );
             return false;
           }
 
           return true;
         }
       }
-      console.log("Returning false, line 393");
+      //console.log("Returning false, line 393");
       return false;
     }
 
-    console.log("Moving one square");
+    // console.log("Moving one square");
     /* Check to see if the pawn is moving backwards */
     if (fromSquare.classList[3][0] === "B") {
-      console.log(
-        "Checking black pawn movement: ",
-        fromTileLocation.row - toTileLocation.row
-      );
+      // console.log(
+      //   "Checking black pawn movement: ",
+      //   fromTileLocation.row - toTileLocation.row
+      // );
       if (fromTileLocation.row - toTileLocation.row > 0) {
-        console.log("Going backwards with the black pawn. Invalid.");
+        //console.log("Going backwards with the black pawn. Invalid.");
         return false;
       }
     } else if (fromSquare.classList[3][0] === "W") {
-      console.log(
-        "Checking white pawn movement: ",
-        toTileLocation.row - fromTileLocation.row
-      );
+      // console.log(
+      //   "Checking white pawn movement: ",
+      //   toTileLocation.row - fromTileLocation.row
+      // );
       if (toTileLocation.row - fromTileLocation.row > 0) {
-        console.log("Going backwards with the white pawn. Invalid.");
+        //  console.log("Going backwards with the white pawn. Invalid.");
         return false;
       }
     }
@@ -134,7 +134,7 @@ function isValidPawnMove(fromSquare, toSquare) {
       document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
         .children.length > 0
     ) {
-      console.log("Trying to take a piece right in front of it. Invalid.");
+      // console.log("Trying to take a piece right in front of it. Invalid.");
       return false;
     }
 
@@ -146,18 +146,18 @@ function isValidPawnMove(fromSquare, toSquare) {
 
   //Black pawn
   if (fromSquare.classList[3][0] === "B") {
-    console.log(
-      "Black pawn: ",
-      toTileLocation.row - fromTileLocation.row,
-      fromTileLocation.row - toTileLocation.row
-    );
+    // console.log(
+    //   "Black pawn: ",
+    //   toTileLocation.row - fromTileLocation.row,
+    //   fromTileLocation.row - toTileLocation.row
+    // );
     if (
       /*Going backwards */ toTileLocation.row - fromTileLocation.row < 0 ||
       fromTileLocation.row - toTileLocation.row > 1
     ) {
-      console.log(
-        "Trying to move more than one square diagonally or going backwards, invalid."
-      );
+      // console.log(
+      //   "Trying to move more than one square diagonally or going backwards, invalid."
+      // );
       return false;
     }
 
@@ -173,9 +173,9 @@ function isValidPawnMove(fromSquare, toSquare) {
       toTileLocation.row - fromTileLocation.row > 1 ||
       /*Going backwards */ fromTileLocation.row - toTileLocation.row < 0
     ) {
-      console.log(
-        "Trying to move more than one square diagonally or going backwards, invalid."
-      );
+      // console.log(
+      //   "Trying to move more than one square diagonally or going backwards, invalid."
+      // );
       return false;
     }
 
@@ -186,6 +186,6 @@ function isValidPawnMove(fromSquare, toSquare) {
       return true;
     }
   }
-  console.log("Returning false - line 153");
+  // console.log("Returning false - line 153");
   return false;
 }

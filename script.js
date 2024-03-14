@@ -473,20 +473,20 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
   // console.log("To: " + swappingTo.classList);
   if (swappingFrom.classList[3][0] !== swappingTo.classList[3][0]) {
     if (isValidMove(pieceClassName, swappingFrom, swappingTo)) {
-      if (!gameStarted) {
-        document.getElementById("set-black").disabled = true;
-        document.getElementById("set-white").disabled = true;
+      // if (!gameStarted) {
+      //   document.getElementById("set-black").disabled = true;
+      //   document.getElementById("set-white").disabled = true;
 
-        document.getElementById("set-black").disabled = true;
-        document.getElementById("set-white").disabled = true;
+      //   document.getElementById("set-black").disabled = true;
+      //   document.getElementById("set-white").disabled = true;
 
-        let setWhiteOptions =
-          document.getElementsByClassName("set-white-options")[0];
-        setWhiteOptions.classList.remove("show");
-        let setBlackOptions =
-          document.getElementsByClassName("set-black-options")[0];
-        setBlackOptions.classList.remove("show");
-      }
+      //   let setWhiteOptions =
+      //     document.getElementsByClassName("set-white-options")[0];
+      //   setWhiteOptions.classList.remove("show");
+      //   let setBlackOptions =
+      //     document.getElementsByClassName("set-black-options")[0];
+      //   setBlackOptions.classList.remove("show");
+      // }
       /* 
       Check for the first character, it indicates the colour
       W = White
@@ -536,10 +536,40 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
         ) {
           // If the taken piece is a King, show the modal
           $("#kingTakenModal").modal("show");
+          currentPlayer = "W";
           chessBoard.innerHTML = "";
+          playersTurnTitle.style.backgroundColor = "White";
+          playersTurnTitle.style.color = "Black";
+          playersTurnTitle.innerHTML = "White's Turn";
           // chosenWhiteChessSet = "white/images/";
           // chosenBlackChessSet = "black/images/";
           generateNewChessBoard(chessBoard);
+
+          const blackControlsMobile = document.getElementById("black-controls");
+          const whiteControlsMobile = document.getElementById("white-controls");
+
+          const blackControlsDesktop = document.getElementById("top-controls");
+          const whiteControlsDesktop =
+            document.getElementById("bottom-controls");
+
+          blackControlsDesktop.classList.remove("hide");
+          whiteControlsDesktop.classList.remove("hide");
+          blackControlsMobile.classList.remove("hide");
+          whiteControlsMobile.classList.remove("hide");
+
+          const playersTurn = document.getElementById("players-turn");
+
+          playersTurn.innerHTML = "White's turn";
+          playersTurn.textContent = "White's turn";
+          let whiteButton = document.getElementById("set-white");
+          let blackButton = document.getElementById("set-black");
+          // Remove the "hide" class and enable the buttons
+          whiteButton.classList.remove("hide");
+          blackButton.classList.remove("hide");
+          whiteButton.disabled = false;
+          blackButton.disabled = false;
+
+          gameStarted = false;
         }
 
         swappingTo.classList.remove(swappingTo.classList[3]);
@@ -560,7 +590,7 @@ moveToFilledSquare = (swappingFrom, swappingTo) => {
 
         gameStarted = true;
         // console.log("Squares swapped.");
-        isKingBeingTaken(swappingTo);
+        // isKingBeingTaken(swappingTo);
         // console.log("SWAPPING TO: " + swappingTo);
         playTakeSound();
       }
@@ -622,6 +652,8 @@ function resetHighlightedSquares() {
 }
 
 function generateNewChessBoard(chessBoard) {
+  currentPlayer = "W";
+
   let columnNumber = 1;
 
   //Start at one because once rowCounter hits 8 on the last square,

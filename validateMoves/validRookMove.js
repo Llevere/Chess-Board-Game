@@ -43,7 +43,7 @@ function isValidRookMove(fromSquare, toSquare) {
     let pieceFound = false;
     if (fromTileLocation.column > toTileLocation.column) {
       // Rook is moving left
-      console.log("Rook moving left");
+      // console.log("Rook moving left");
       for (
         let i = fromTileLocation.column - 1;
         i >= toTileLocation.column;
@@ -73,11 +73,11 @@ function isValidRookMove(fromSquare, toSquare) {
           document.getElementById(`${i}${fromTileLocation.row}`).children
             .length > 0
         ) {
-          console.log(
-            "Checking: " + i,
-            toTileLocation.column,
-            fromTileLocation.column
-          );
+          // console.log(
+          //   "Checking: " + i,
+          //   toTileLocation.column,
+          //   fromTileLocation.column
+          // );
           if (i === toTileLocation.column) {
             return true;
           }

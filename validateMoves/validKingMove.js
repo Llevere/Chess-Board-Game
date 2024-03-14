@@ -8,10 +8,10 @@ function isValidKingMove(fromSquare, toSquare) {
     fromTileLocation.row - toTileLocation.row > 1 ||
     toTileLocation.row - fromTileLocation.row > 1
   ) {
-    console.log("King trying to move more than one space, invalid move.");
+    // console.log("King trying to move more than one space, invalid move.");
     return false;
   }
 
-  console.log("King Move - Valid swap.");
+  // console.log("King Move - Valid swap.");
   return true;
 }

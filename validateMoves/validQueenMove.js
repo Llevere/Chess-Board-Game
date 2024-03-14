@@ -18,13 +18,13 @@ function isValidQueenMove(fromSquare, toSquare) {
     (fromTileLocation.row - toTileLocation.row === 1 ||
       toTileLocation.row - fromTileLocation.row === 1)
   ) {
-    console.log("Queen is moving one square. Valid move.");
-    console.log(
-      (fromTileLocation.column - toTileLocation.column === 1 ||
-        toTileLocation.column - fromTileLocation.column === 1) &&
-        (fromTileLocation.row - toTileLocation.row === 1 ||
-          toTileLocation.row - fromTileLocation.row === 1)
-    );
+    // console.log("Queen is moving one square. Valid move.");
+    // console.log(
+    //   (fromTileLocation.column - toTileLocation.column === 1 ||
+    //     toTileLocation.column - fromTileLocation.column === 1) &&
+    //     (fromTileLocation.row - toTileLocation.row === 1 ||
+    //       toTileLocation.row - fromTileLocation.row === 1)
+    // );
     return true;
   }
 
@@ -34,7 +34,7 @@ function isValidQueenMove(fromSquare, toSquare) {
     let pieceFound = false;
     if (fromTileLocation.row > toTileLocation.row) {
       // Rook is moving up
-      console.log("Queen moving up");
+      //console.log("Queen moving up");
       for (let i = fromTileLocation.row - 1; i >= toTileLocation.row; i--) {
         if (
           document.getElementById(`${fromTileLocation.column}${i}`).children
@@ -49,7 +49,7 @@ function isValidQueenMove(fromSquare, toSquare) {
       }
     } else {
       // Rook is moving down
-      console.log("Queen moving down");
+      //console.log("Queen moving down");
       for (let i = fromTileLocation.row + 1; i <= toTileLocation.row; i++) {
         if (
           document.getElementById(`${fromTileLocation.column}${i}`).children
@@ -72,7 +72,7 @@ function isValidQueenMove(fromSquare, toSquare) {
     let pieceFound = false;
     if (fromTileLocation.column > toTileLocation.column) {
       // Rook is moving left
-      console.log("Queen moving left");
+      //console.log("Queen moving left");
       for (
         let i = fromTileLocation.column - 1;
         i >= toTileLocation.column;
@@ -92,7 +92,7 @@ function isValidQueenMove(fromSquare, toSquare) {
       }
     } else {
       // Rook is moving right
-      console.log("Queen moving right");
+      //  console.log("Queen moving right");
       for (
         let i = fromTileLocation.column + 1;
         i <= toTileLocation.column;
@@ -117,7 +117,7 @@ function isValidQueenMove(fromSquare, toSquare) {
   }
   //Valid diagonal move
   else if (rowDiff === colDiff) {
-    console.log("Valid diagonal move for the queen");
+    // console.log("Valid diagonal move for the queen");
 
     // Check for obstructions along the diagonal path
     const rowIncrement = toTileLocation.row > fromTileLocation.row ? 1 : -1;
@@ -136,7 +136,7 @@ function isValidQueenMove(fromSquare, toSquare) {
         `${currentCol}${currentRow}`
       );
       if (intermediateSquare.children.length > 0) {
-        console.log("Invalid queen movement: piece found");
+        //console.log("Invalid queen movement: piece found");
         return false;
       }
 
@@ -145,7 +145,7 @@ function isValidQueenMove(fromSquare, toSquare) {
       currentCol += colIncrement;
     }
 
-    console.log("Valid queen diagonal movement");
+    //console.log("Valid queen diagonal movement");
     return true;
   }
   //Diagonal Move

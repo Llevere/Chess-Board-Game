@@ -43,7 +43,7 @@ function isValidBishopMove(fromSquare, toSquare) {
 
   // Ensure that the row and column differences are the same for diagonal movement
   if (rowDiff !== colDiff) {
-    console.log("Invalid bishop movement: not diagonal");
+    // console.log("Invalid bishop movement: not diagonal");
     return false;
   }
 
@@ -72,6 +72,6 @@ function isValidBishopMove(fromSquare, toSquare) {
     currentCol += colIncrement;
   }
 
-  console.log("Valid bishop movement");
+  //console.log("Valid bishop movement");
   return true;
 }

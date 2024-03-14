@@ -19,7 +19,7 @@ function isValidKnightMove(fromSquare, toSquare) {
     fromTileLocation.column === toTileLocation.column ||
     fromTileLocation.row === toTileLocation.row
   ) {
-    console.log("Trying to move in the same column or row, invalid move.");
+    // console.log("Trying to move in the same column or row, invalid move.");
     return false;
   }
 
@@ -30,7 +30,7 @@ function isValidKnightMove(fromSquare, toSquare) {
     fromTileLocation.column - 1 === toTileLocation.column &&
     fromTileLocation.row - toTileLocation.row === 2
   ) {
-    console.log("Knight move - Moving two squares up, one to the left.");
+    // console.log("Knight move - Moving two squares up, one to the left.");
 
     if (
       (document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
@@ -41,12 +41,12 @@ function isValidKnightMove(fromSquare, toSquare) {
       document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
         .children.length === 0
     ) {
-      console.log("Taking a different colour chess piece");
+      // console.log("Taking a different colour chess piece");
       return true;
     }
-    console.log(
-      "Either trying to take a same colour chess piece, or something else happened. Line 48"
-    );
+    // console.log(
+    //   "Either trying to take a same colour chess piece, or something else happened. Line 48"
+    // );
     return false;
   }
   //Move to the right of the board
@@ -54,7 +54,7 @@ function isValidKnightMove(fromSquare, toSquare) {
     toTileLocation.column - 1 === fromTileLocation.column &&
     fromTileLocation.row - toTileLocation.row === 2
   ) {
-    console.log("Knight move - Moving two squares up, one to the right.");
+    //console.log("Knight move - Moving two squares up, one to the right.");
 
     if (
       (document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
@@ -64,12 +64,12 @@ function isValidKnightMove(fromSquare, toSquare) {
       document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
         .children.length === 0
     ) {
-      console.log("Taking a different colour chess piece");
+      //console.log("Taking a different colour chess piece");
       return true;
     }
-    console.log(
-      "Either trying to take a same colour chess piece, or something else happened. Line 67"
-    );
+    // console.log(
+    //   "Either trying to take a same colour chess piece, or something else happened. Line 67"
+    // );
     return false;
   }
 
@@ -88,7 +88,7 @@ function isValidKnightMove(fromSquare, toSquare) {
     fromTileLocation.row + 1 === toTileLocation.row &&
     toTileLocation.column - fromTileLocation.column === 2
   ) {
-    console.log("Knight move - Moving two squares right, one down.");
+    // console.log("Knight move - Moving two squares right, one down.");
 
     if (
       (document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
@@ -99,12 +99,12 @@ function isValidKnightMove(fromSquare, toSquare) {
       document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
         .children.length === 0
     ) {
-      console.log("Taking a different colour chess piece");
+      // console.log("Taking a different colour chess piece");
       return true;
     }
-    console.log(
-      "Either trying to take a same colour chess piece, or something else happened. Line 90"
-    );
+    // console.log(
+    //   "Either trying to take a same colour chess piece, or something else happened. Line 90"
+    // );
     return false;
   }
   //Moving up on the board
@@ -112,7 +112,7 @@ function isValidKnightMove(fromSquare, toSquare) {
     fromTileLocation.row - 1 === toTileLocation.row &&
     toTileLocation.column - fromTileLocation.column === 2
   ) {
-    console.log("Knight move - Moving two squares right, one up.");
+    //console.log("Knight move - Moving two squares right, one up.");
 
     if (
       (document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
@@ -122,12 +122,12 @@ function isValidKnightMove(fromSquare, toSquare) {
       document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
         .children.length === 0
     ) {
-      console.log("Taking a different colour chess piece");
+      //console.log("Taking a different colour chess piece");
       return true;
     }
-    console.log(
-      "Either trying to take a same colour chess piece, or something else happened. Line 109"
-    );
+    // console.log(
+    //   "Either trying to take a same colour chess piece, or something else happened. Line 109"
+    // );
     return false;
   }
 
@@ -138,7 +138,7 @@ function isValidKnightMove(fromSquare, toSquare) {
     fromTileLocation.column - 1 === toTileLocation.column &&
     toTileLocation.row - fromTileLocation.row === 2
   ) {
-    console.log("Knight move - Moving two squares down, one to the left.");
+    // console.log("Knight move - Moving two squares down, one to the left.");
 
     if (
       (document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
@@ -149,12 +149,12 @@ function isValidKnightMove(fromSquare, toSquare) {
       document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
         .children.length === 0
     ) {
-      console.log("Taking a different colour chess piece");
+      //console.log("Taking a different colour chess piece");
       return true;
     }
-    console.log(
-      "Either trying to take a same colour chess piece, or something else happened. Line 136"
-    );
+    // console.log(
+    //   "Either trying to take a same colour chess piece, or something else happened. Line 136"
+    // );
     return false;
   }
   //Move to the right of the board
@@ -162,7 +162,7 @@ function isValidKnightMove(fromSquare, toSquare) {
     toTileLocation.column - 1 === fromTileLocation.column &&
     toTileLocation.row - fromTileLocation.row === 2
   ) {
-    console.log("Knight move - Moving two squares down, one to the right.");
+    //console.log("Knight move - Moving two squares down, one to the right.");
 
     if (
       (document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
@@ -172,12 +172,12 @@ function isValidKnightMove(fromSquare, toSquare) {
       document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
         .children.length === 0
     ) {
-      console.log("Taking a different colour chess piece");
+      //console.log("Taking a different colour chess piece");
       return true;
     }
-    console.log(
-      "Either trying to take a same colour chess piece, or something else happened. Line 158"
-    );
+    // console.log(
+    //   "Either trying to take a same colour chess piece, or something else happened. Line 158"
+    // );
     return false;
   }
 
@@ -188,7 +188,7 @@ function isValidKnightMove(fromSquare, toSquare) {
     fromTileLocation.row - 1 === toTileLocation.row &&
     fromTileLocation.column - toTileLocation.column === 2
   ) {
-    console.log("Knight move - Moving two squares right, one up.");
+    // console.log("Knight move - Moving two squares right, one up.");
 
     if (
       (document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
@@ -199,12 +199,12 @@ function isValidKnightMove(fromSquare, toSquare) {
       document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
         .children.length === 0
     ) {
-      console.log("Taking a different colour chess piece");
+      // console.log("Taking a different colour chess piece");
       return true;
     }
-    console.log(
-      "Either trying to take a same colour chess piece, or something else happened. Line 184"
-    );
+    // console.log(
+    //   "Either trying to take a same colour chess piece, or something else happened. Line 184"
+    // );
     return false;
   }
   //Moving down on the board
@@ -212,7 +212,7 @@ function isValidKnightMove(fromSquare, toSquare) {
     fromTileLocation.row + 1 === toTileLocation.row &&
     fromTileLocation.column - toTileLocation.column === 2
   ) {
-    console.log("Knight move - Moving two squares right, one down.");
+    // console.log("Knight move - Moving two squares right, one down.");
 
     if (
       (document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
@@ -222,15 +222,15 @@ function isValidKnightMove(fromSquare, toSquare) {
       document.getElementById(`${toTileLocation.column}${toTileLocation.row}`)
         .children.length === 0
     ) {
-      console.log("Taking a different colour chess piece");
+      // console.log("Taking a different colour chess piece");
       return true;
     }
-    console.log(
-      "Either trying to take a same colour chess piece, or something else happened. Line 207"
-    );
+    // console.log(
+    //   "Either trying to take a same colour chess piece, or something else happened. Line 207"
+    // );
     return false;
   }
 
-  console.log("Returning false - Line 227");
+  //console.log("Returning false - Line 227");
   return false;
 }
